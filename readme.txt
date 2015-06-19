@@ -96,6 +96,15 @@ For premium upgrade please go [here](https://accesspressthemes.com/wordpress-plu
 
 For a easy installation guide checkout the Installation tab above.
 
+For complete information and documentation regarding plugin, please visit below links.
+
+[Plugin information](https://accesspressthemes.com/wordpress-plugins/accesspress-social-login-lite/)
+
+[Docs](https://accesspressthemes.com/documentation/documentationplugin-instruction-accesspress-social-login-lite/)
+
+[Demo](https://accesspressthemes.com/demo/wordpress-plugins/accesspress-social-login-lite/)
+
+
 == Installation ==
 1. Unzip accesspress-social-login-lite.zip
 2. Upload all the files to the /wp-content/plugins/accesspress-social-login-lite
