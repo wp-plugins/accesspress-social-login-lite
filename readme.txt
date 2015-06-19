@@ -1,6 +1,6 @@
 === AccessPress Social Login Lite ===
 Contributors: Access Keys
-Tags: social,  login, social login, facebook, twitter, google, social connect, social network login, register, login with, signin, oauth, authorize
+Tags: social,  login, social login, facebook, twitter, google, social connect, social network login, register, login with, signin, oauth, authorize, oauth
 Donate link: http://accesspressthemes.com/donation/
 Requires at least: 3.8
 Tested up to: 4.2
@@ -32,9 +32,9 @@ Select from 4 beautiful designs of social login buttons/icons.
 <strong>Your website visitors can now login using one of their favorite social account login. Easy, quick and convenient.<strong>
 
 = Free Features: =
-* Login with the most popular 3 social media. 
-* Configure each social accounts by setting up a few authorization details. 
-* Configure which social media account to enable/disable in the login area. 
+* Login with the most popular 3 social media.
+* Configure each social accounts by setting up a few authorization details.
+* Configure which social media account to enable/disable in the login area.
 * Configure which area of the website the social login should be displayed (eg. Registration, login, comments).
 * Option to choose from 4 beautifully designed social login buttons/icons.
 * Option to configure the order of the social login buttons.
@@ -48,7 +48,6 @@ Select from 4 beautiful designs of social login buttons/icons.
 * Translation ready.
 * <strong>Support</strong>
         - Dedicated email, forum support.
-
 
 = Supported Networks: =
 * Facebook
