@@ -1,0 +1,38 @@
+<?php defined( 'ABSPATH' ) or die( 'No script kiddies please!' ); ?>
+<?php
+if (is_user_logged_in()){
+	global $current_user;
+	$user_info 	= "<span class='display-name'>{$current_user->data->display_name}</span>&nbsp;";
+	$user_info  .= get_avatar( $current_user->ID, 20 );
+	?><div class="user-login">Welcome <b><?php echo $user_info;?></b>&nbsp;|&nbsp;<a href="<?php echo wp_logout_url(); ?>" title="Logout">Logout</a></div>
+	<?php
+}else{
+?>
+<?php $options = get_option( APSL_SETTINGS ); ?>
+<?php
+	$current_url = APSL_Lite_Login_Check_Class::curPageURL();
+	$encoded_url = urlencode($current_url);
+?>
+
+<?php $theme = $options['apsl_icon_theme']; ?>
+
+<div class='apsl-login-networks theme-<?php echo $theme; ?> clearfix'>
+	<?php if(isset($attr['login_text']) && $attr['login_text']!=''){ ?>
+	<span class='apsl-login-new-text'><?php echo $attr['login_text']; ?></span>
+	<?php } ?>
+	<?php if(isset($_REQUEST['error']) || isset($_REQUEST['denied'])){ ?> 
+			<div class='apsl-error'><?php _e('You have Access Denied. Please authorize the app to login.', APSL_TEXT_DOMAIN ); ?></div>
+	<?php } ?>
+	<div class='social-networks'>
+		<?php foreach($options['network_ordering'] as $key=>$value): ?>
+		<?php	if($options["apsl_{$value}_settings"]["apsl_{$value}_enable"]==='enable'){ ?>
+		 <a href="?apsl_login_id=<?php echo $value; ?>_login&redirect_to=<?php echo $encoded_url; ?>" title='<?php _e('Login with', APSL_TEXT_DOMAIN ); echo ' '.$value; ?>'>
+			 	<div class="apsl-icon-block icon-<?php echo $value; ?>">
+					<i class="fa fa-<?php echo $value; ?>"></i>
+				</div>
+		 </a>
+			<?php } ?>
+		<?php endforeach; ?>
+ 	</div>
+</div>
+<?php } ?>
