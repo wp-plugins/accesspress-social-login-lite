@@ -31,7 +31,7 @@ Select from 4 beautiful designs of social login buttons/icons.
 
 <strong>Your website visitors can now login using one of their favorite social account login. Easy, quick and convenient.<strong>
 
-= Features: =
+= Free Features: =
 * Login with the most popular 3 social media. 
 * Configure each social accounts by setting up a few authorization details. 
 * Configure which social media account to enable/disable in the login area. 
@@ -55,6 +55,35 @@ Select from 4 beautiful designs of social login buttons/icons.
 * Twitter
 * Google
 
+
+= Premium Features: =
+
+For more features upgrade to PRO version
+
+	Upgrade to PRO version for:
+	★ 9 social network support
+	    - Facebook
+		- Twitter
+		- Google
+		- LinkedIn
+		- Vkonate
+		- Instagram
+		- Foursquare
+		- Wordpress
+		- Buffer
+
+	★ 16 Beautiful design templates.
+
+	★ Works with Woocommerce.
+
+	★ Works with Buddypress.
+
+	★ High level of customization/configuration - admin can change the title attributes for 
+	social media icons, other texts, strings etc.
+
+= Premium upgrade =
+
+For premium upgrade please go [here](https://accesspressthemes.com/wordpress-plugins/accesspress-social-login/)
 
 
 = Some Useful Links =
@@ -88,12 +117,10 @@ No , you won't need to get any trouble regarding design and layout of the icons 
 Yes. You can use the AccessPress social login lite anywhere by using shortcode in your templates files or in posts and pages content. Also you can use login widget in sidebar.
 
 == Screenshots ==
-1. Frontend Display of Social Share
-2. Frontend Display of Social Share
-3. Backend Social Networks Section
-4. Backend Share Options Section
-5. Backend Display Settings Section
-6. Backend Miscellaneous Settings Section
+1. Backend Display of Social Login.
+2. Frontend Display of Social Login.
+3. Backend Networks settings section.
+4. Backend Other settings Section.
 
 == Changelog ==
 = 1.0.0 =
