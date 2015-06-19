@@ -77,8 +77,8 @@ For more features upgrade to PRO version
 
 	★ Works with Buddypress.
 
-	★ High level of customization/configuration - admin can change the title attributes for 
-	social media icons, other texts, strings etc.
+	★ High level of customization/configuration - admin can change the title 
+	attributes for social media icons, other texts, strings etc.
 
 = Premium upgrade =
 
