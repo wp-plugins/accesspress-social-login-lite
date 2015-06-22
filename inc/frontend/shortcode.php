@@ -29,6 +29,8 @@ if (is_user_logged_in()){
 		 <a href="?apsl_login_id=<?php echo $value; ?>_login&redirect_to=<?php echo $encoded_url; ?>" title='<?php _e('Login with', APSL_TEXT_DOMAIN ); echo ' '.$value; ?>'>
 			 	<div class="apsl-icon-block icon-<?php echo $value; ?>">
 					<i class="fa fa-<?php echo $value; ?>"></i>
+					<span class="apsl-login-text"><?php _e('Login', APSL_TEXT_DOMAIN ); ?></span>
+					<span class="apsl-long-login-text"><?php _e('Login with', APSL_TEXT_DOMAIN ); ?><?php echo ' '.$value; ?></span>
 				</div>
 		 </a>
 			<?php } ?>

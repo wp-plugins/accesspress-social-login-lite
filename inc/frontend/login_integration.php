@@ -14,6 +14,8 @@
 	 <a href="?apsl_login_id=<?php echo $value; ?>_login" title='<?php _e('Login with', APSL_TEXT_DOMAIN ); echo ' '.$value; ?>' >
 	 <div class="apsl-icon-block icon-<?php echo $value; ?> clearfix">
 		<i class="fa fa-<?php echo $value; ?>"></i>
+		<span class="apsl-login-text"><?php _e('Login', APSL_TEXT_DOMAIN ); ?></span>
+		<span class="apsl-long-login-text"><?php _e('Login with', APSL_TEXT_DOMAIN ); ?><?php echo ' '.$value; ?></span>
 	 </div>
 	 </a>
 		<?php } ?>

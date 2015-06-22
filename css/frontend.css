@@ -15,8 +15,8 @@ div.social-networks a{
     display: none;
 }
 
-.theme-4 .apsl-long-login-text,.theme-4 .apsl-login-text {
-    display: none;
+.theme-4 .apsl-login-text {
+  display: none;
 }
 
 .apsl-icon-block {
@@ -24,7 +24,6 @@ div.social-networks a{
 
 }
 
-.theme-1 
 .theme-1 .fa.fa-facebook:hover,.theme-1 .fa.fa-twitter:hover,.theme-1 .fa.fa-google:hover,
 .theme-1 .fa.fa-linkedin:hover,.theme-1 .fa.fa-instagram:hover,.theme-1 .fa.fa-vk:hover,
 .theme-1 .fa.fa-foursquare:hover,.theme-1 .fa.fa-wordpress:hover, .theme-1 .fa-buffer:hover 
@@ -48,8 +47,6 @@ div.social-networks a{
     -moz-transition: all 1s ease;/* Firefox 4-15 */
     -o-transition: all 1s ease;/* Opera 10.5-12.00 */
     transition: all 1s ease;/* Firefox 16+, Opera 12.50+ */
- 
-
 }
 
 .theme-3 .fa.fa-facebook:hover,.theme-3 .fa.fa-twitter:hover,.theme-3 .fa.fa-google:hover,
@@ -304,6 +301,7 @@ width: 40px;
     width: 38px;
     border: 1px solid #1C74BC; 
 }
+
 .theme-2 .fa-buffer {
     background:  url("../images/buffer.png") no-repeat scroll center center;
         color: #fff;
@@ -316,6 +314,7 @@ display: table-cell;
         border: 1px solid #333333;
         background-color: #333333
 }
+
 .theme-2 .fa.fa-twitter{
 background: #24B4F3 none repeat scroll 0 0;
     color: #ffffff;
@@ -328,6 +327,7 @@ background: #24B4F3 none repeat scroll 0 0;
         border: 1px solid #24B4F3;
 
 }
+
 .theme-2 .fa.fa-google{
     background: #86C344 none repeat scroll 0 0;
     color: #ffffff;
@@ -340,6 +340,7 @@ background: #24B4F3 none repeat scroll 0 0;
         border: 1px solid #86C344;
 
 }
+
 .theme-2 .fa.fa-linkedin{
     background: #0000ff none repeat scroll 0 0;
     color: #ffffff;
@@ -353,6 +354,7 @@ background: #24B4F3 none repeat scroll 0 0;
 
 
 }
+
 .theme-2 .fa.fa-instagram{
      background: #D93232 none repeat scroll 0 0;
     color: #ffffff;
@@ -365,6 +367,7 @@ background: #24B4F3 none repeat scroll 0 0;
         border: 1px solid #D93232;
 
 }
+
 .theme-2 .fa.fa-vk{
     background: #B7BABB none repeat scroll 0 0;
     color: #ffffff;
@@ -377,6 +380,7 @@ background: #24B4F3 none repeat scroll 0 0;
         border: 1px solid #B7BABB;
 
 }
+
 .theme-2 .fa.fa-foursquare{
     background: #211F20 none repeat scroll 0 0;
     color: #ffffff;
@@ -389,6 +393,7 @@ background: #24B4F3 none repeat scroll 0 0;
         border: 1px solid #211F20;
 
 }
+
 .theme-2 .fa.fa-wordpress{
     background:#4E624F none repeat scroll 0 0;
     color: #ffffff;
@@ -448,37 +453,76 @@ background: #24B4F3 none repeat scroll 0 0;
 .theme-2 .fa.fa-vk:hover{
       border: 1px solid #B7BABB; 
   color: #B7BABB ;
- 
-
 }
 
 .theme-2 .fa-buffer:hover{
- 
   background:  url("../images/buffer-black.png") no-repeat scroll center center;
   border: 1px solid #333333; 
   background-color: #fff ;
 }
 
-.theme-4 .fa.fa-facebook,.theme-4 .apsl-icon-block.buffer,.theme-4 .fa.fa-twitter,.theme-4 .fa.fa-google,
-.theme-4 .fa.fa-linkedin,.theme-4 .fa.fa-instagram,.theme-4 .fa.fa-vk,.theme-4 .fa.fa-foursquare,
-.theme-4 .fa.fa-wordpress{
-  color:#000;
-  font-size:20px;
+.theme-4 .apsl-icon-block.icon-facebook {
+    background: #48629b none repeat scroll 0 0;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: 13px;
+    line-height: 22px;
+    padding: 7px 15px;
+    vertical-align: middle;
+display: inline-block
 }
 
-.theme-4 .fa.fa-buffer {
-  background: rgba(0, 0, 0, 0) url("../images/buffer-black.png") no-repeat scroll center center;
-  width:18px;
-  height:18px;
-  background-size: cover;
-  margin-top: 1px
+.theme-4 .apsl-icon-block.icon-twitter {
+    background: #23b0e6 none repeat scroll 0 0;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: 13px;
+    line-height: 22px;
+    padding: 7px 15px;
+    vertical-align: middle;
+    display: inline-block
+}
+
+.theme-4 .fa.fa-facebook {
+    font-size: 19px;
+    padding-right: 16px;
+    padding-top:2px;
+    vertical-align: top;
+    display: inline-block
+}
+
+.theme-4 .fa.fa-twitter {
+    font-size: 19px;
+    padding-right: 16px;
+    padding-top:2px;
+    vertical-align: top;
+    display: inline-block
+}
+
+.theme-4 .apsl-icon-block.icon-google {
+    background: #dc4b38 none repeat scroll 0 0;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: 13px;
+    line-height: 22px;
+    padding: 7px 15px;
+    vertical-align: top;
+    display: inline-block
+}
+
+.theme-4 .fa.fa-google {
+    font-size: 19px;
+    padding-right: 16px;
+    padding-top:2px;
+    vertical-align: middle;
+    display: inline-block
 }
 
 .apsl-icon-block {
    display: inline-block;
    margin-right: 10px;
 
-   }
+}
 
 span.apsl-login-new-text{ 
   font-size: 15px;
@@ -489,10 +533,6 @@ span.apsl-login-new-text{
 
 #loginform a{
   display: inline-block;
-}
-
-.theme-4 .apsl-icon-block.buffer.clearfix{
- background-color: #fff;
 }
 
 .apsl-error{

@@ -1,10 +1,10 @@
-=== AccessPress Social Login Lite ===
+﻿=== AccessPress Social Login Lite ===
 Contributors: Access Keys
 Tags: social,  login, social login, facebook, twitter, google, social connect, social network login, register, login with, signin, oauth, authorize, oauth
 Donate link: http://accesspressthemes.com/donation/
 Requires at least: 3.8
 Tested up to: 4.2
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -131,6 +131,10 @@ Yes. You can use the AccessPress social login lite anywhere by using shortcode i
 4. Backend Other settings Section.
 
 == Changelog ==
+= 1.0.1 =
+* Change of the theme 4 for the social login icons with text.
+* Additon of the necessary css for the theme 4.
+
 = 1.0.0 =
 * Plugin submitted to http://wordpress.org for review and approval
 
