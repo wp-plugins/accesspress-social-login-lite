@@ -15,8 +15,10 @@ function __construct(){
 				break;
 
 			case 'twitter':
+			    if( !class_exists( 'TwitterOAuth' ) ){
 				include( APSL_PLUGIN_DIR.'twitter/OAuth.php' );
 				include( APSL_PLUGIN_DIR.'twitter/twitteroauth.php' );
+                }
 				$this->onTwitterLogin();
 				break;
 
@@ -25,7 +27,6 @@ function __construct(){
 				include( APSL_PLUGIN_DIR.'google/Service/Plus.php' );
 				$this->onGoogleLogin();
 				break;
-			
 		}
 	}
 }
@@ -47,7 +48,9 @@ function onFacebookLogin(){
 			update_user_meta($row->ID, 'deuid', $result->deuid);
 			update_user_meta($row->ID, 'deutype', $result->deutype);
 			update_user_meta($row->ID, 'deuimage', $result->deuimage);
-			wp_update_user( array ('ID' => $row->ID, 'display_name' => $result->first_name.' '.$result->last_name, 'role'=>$options['apsl_user_role']) ) ;
+			update_user_meta($row->ID, 'description', $result->about);
+			update_user_meta($row->ID, 'sex', $result->gender);
+			wp_update_user( array ('ID' => $row->ID, 'display_name' => $result->first_name.' '.$result->last_name, 'role'=>$options['apsl_user_role'], 'user_url' => $result->url) ) ;
 		}
 		$this->loginUser($row->ID);
 	}
@@ -99,6 +102,7 @@ function onFacebookLogin(){
 						$user = null;
 				  	}
 				}
+
 				if($user!=null){
 					$response->status 		= 'SUCCESS';
 					$response->deuid		= $user_profile['id'];
@@ -107,6 +111,9 @@ function onFacebookLogin(){
 					$response->last_name	= $user_profile['last_name'];
 					$response->email		= $user_profile['email'];
 					$response->username		= $user_profile['email'];
+					$response->gender 		= $user_profile['gender'];
+					$response->url 			= $user_profile['link'];
+					$response->about 		= ''; //facebook doesn't return user about details.
 					$headers = get_headers('https://graph.facebook.com/'.$user_profile['id'].'/picture',1);
 					
 					// just a precaution, check whether the header isset...
@@ -141,7 +148,8 @@ function onTwitterLogin(){
 			update_user_meta($row->ID, 'deuid', $result->deuid);
 			update_user_meta($row->ID, 'deutype', $result->deutype);
 			update_user_meta($row->ID, 'deuimage', $result->deuimage);
-			wp_update_user( array ('ID' => $row->ID, 'display_name' => $result->first_name.' '.$result->last_name, 'role'=>$options['apsl_user_role']) ) ;
+			update_user_meta($row->ID, 'description', $result->about);
+			wp_update_user( array ('ID' => $row->ID, 'display_name' => $result->first_name.' '.$result->last_name, 'role'=>$options['apsl_user_role'], 'user_url' => $result->url) ) ;
 		}
 		$this->loginUser($row->ID);
 	}
@@ -219,10 +227,14 @@ function onTwitterLogin(){
 					$response->name			= explode(' ', $user_profile->name, 2);
 					$response->first_name	= $response->name[0];
 					$response->last_name	= (isset($response->name[1]))?$response->name[1]:'';
-					$response->deuimage 	= $user_profile->profile_image_url;
+					$response->deuimage 	= $user_profile->profile_image_url_https;
 					$response->email		= $user_profile->screen_name.'@twitter.com';
 					$response->username		= $user_profile->screen_name.'@twitter.com';
-					$response->error_message = '';				
+					$response->url 			= $user_profile->url;
+					$response->about 		= $user_profile->description;
+					$response->gender 		= $user_profile->gender;
+					$response->location 	= $user_profile->location;
+					$response->error_message = '';
 				}else{
 					$response->status 		= 'ERROR';
 					$response->error_code 	= 2;
@@ -255,7 +267,9 @@ function onGoogleLogin(){
 				update_user_meta($row->ID, 'last_name', $result->last_name);
 				update_user_meta($row->ID, 'deuid', $result->deuid);
 				update_user_meta($row->ID, 'deutype', $result->deutype);
-				wp_update_user( array ('ID' => $row->ID, 'display_name' => $result->first_name, 'role'=>$options['apsl_user_role']) ) ;
+				update_user_meta($row->ID, 'deuimage', $result->deuimage);
+				update_user_meta($row->ID, 'description', $result->about);
+				wp_update_user( array ('ID' => $row->ID, 'display_name' => $result->first_name, 'role'=>$options['apsl_user_role'], 'user_url' => $result->url) ) ;
 			}
 			$this->loginUser($row->ID);
 		}
@@ -322,6 +336,11 @@ function onGoogleLogin(){
 					$response->first_name	= $user->name->givenName;
 					$response->last_name	= $user->name->familyName;
 					$response->deuid		= $user->emails[0]->value;
+					$response->deuimage 	= $user->image->url;
+					$response->gender 		= $user->gender;
+					$response->id 			= $user->id;
+					$response->about 		= $user->aboutMe;
+					$response->url 			= $user->url;
 					$response->deutype		= 'google';
 					$response->status   	= 'SUCCESS';
 					$response->error_message = '';
@@ -354,7 +373,8 @@ function siteUrl(){
 }
 
 function callBackUrl(){
-	$url = 'http://' . $_SERVER["HTTP_HOST"] . $_SERVER["PHP_SELF"];
+	$connection = !empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
+	$url = $connection . $_SERVER["HTTP_HOST"] . $_SERVER["PHP_SELF"];
 	if(strpos($url, '?')===false){
 		$url .= '?';
 	}else{
@@ -411,7 +431,10 @@ function getUserByUsername ($username){
 function creatUser($user_name, $user_email){
 	$random_password = wp_generate_password(12, false);
 	$user_id = wp_create_user( $user_name, $random_password, $user_email );
-	wp_new_user_notification( $user_id, $random_password );
+	$options = get_option( APSL_SETTINGS );
+	if($options['apsl_send_email_notification_options'] == 'yes'){
+		wp_new_user_notification( $user_id, $random_password );
+	}
 	return $user_id;
 }
 
@@ -429,6 +452,8 @@ function set_cookies($user_id = 0, $remember = true) {
 	}
 
 function loginUser($user_id){
+
+	$current_url_an = get_permalink();
 	$reauth = empty($_REQUEST['reauth']) ? false : true;
 	if ( $reauth )
 		wp_clear_auth_cookie();
@@ -456,7 +481,36 @@ function loginUser($user_id){
 	}
 	
 	$requested_redirect_to = isset( $_REQUEST['redirect_to'] ) ? $_REQUEST['redirect_to'] : site_url();
-	$redirect_to = apply_filters( 'login_redirect', $redirect_to, $requested_redirect_to, $user );
+	$user_login_url = apply_filters( 'login_redirect', $redirect_to, $requested_redirect_to, $user );
+
+	$options = get_option( APSL_SETTINGS );
+	if(isset($options['apsl_custom_login_redirect_options']) && $options['apsl_custom_login_redirect_options'] !=''){
+			if($options['apsl_custom_login_redirect_options'] =='home'){
+				$user_login_url =  home_url();
+			
+			}else if($options['apsl_custom_login_redirect_options'] =='current_page'){
+				if ( isset( $_REQUEST['redirect_to'] ) ) {
+					$redirect_to = $_REQUEST['redirect_to'];
+					// Redirect to https if user wants ssl
+					if ( isset($secure_cookie) && false !== strpos($redirect_to, 'wp-admin') )
+						$user_login_url = preg_replace('|^http://|', 'https://', $redirect_to);
+				} else {
+					$user_login_url = home_url();
+				}
+
+			}else if( $options['apsl_custom_login_redirect_options'] == 'custom_page' ){
+				if( $options['apsl_custom_login_redirect_link'] !='' ){
+					$login_page = $options['apsl_custom_login_redirect_link'];
+					$user_login_url = $login_page;
+				}else{
+					$user_login_url = home_url();
+				}
+			}
+	}else{
+		$user_login_url = home_url();
+	}
+
+	$redirect_to = $user_login_url;
 	wp_safe_redirect( $redirect_to );
 	exit();
 }
@@ -482,7 +536,8 @@ function loginUser($user_id){
 		$property = $reflection->getProperty($prop); 
 		$property->setAccessible(true); 
 		return $property->getValue($obj); 
-	}	
+	}
+
 } //termination of a class
 
 } //end of if statement

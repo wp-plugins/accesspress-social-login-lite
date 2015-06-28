@@ -1,14 +1,33 @@
 <?php defined( 'ABSPATH' ) or die( 'No script kiddies please!' ); ?>
+<?php $options = get_option( APSL_SETTINGS ); ?>
 <?php
 if (is_user_logged_in()){
 	global $current_user;
 	$user_info 	= "<span class='display-name'>{$current_user->data->display_name}</span>&nbsp;";
 	$user_info  .= get_avatar( $current_user->ID, 20 );
-	?><div class="user-login">Welcome <b><?php echo $user_info;?></b>&nbsp;|&nbsp;<a href="<?php echo wp_logout_url(); ?>" title="Logout">Logout</a></div>
+	
+	if(isset($options['apsl_custom_logout_redirect_options']) && $options['apsl_custom_logout_redirect_options'] !=''){
+		if($options['apsl_custom_logout_redirect_options'] =='home'){
+			$user_logout_url = wp_logout_url( home_url() );
+		}else if($options['apsl_custom_logout_redirect_options'] =='current_page'){
+			$user_logout_url = wp_logout_url( get_permalink() );
+
+		}else if( $options['apsl_custom_logout_redirect_options'] == 'custom_page' ){
+			if( $options['apsl_custom_logout_redirect_link'] !='' ){
+				$logout_page = $options['apsl_custom_logout_redirect_link'];
+				$user_logout_url = wp_logout_url($logout_page);
+			}else{
+				$user_logout_url = wp_logout_url( get_permalink() );
+			}
+		}
+		
+	}else{
+		$user_logout_url = wp_logout_url(get_permalink());
+	}
+	?><div class="user-login">Welcome <b><?php echo $user_info; ?></b>&nbsp;|&nbsp;<a href="<?php echo $user_logout_url; ?>" title="Logout">Logout</a></div>
 	<?php
 }else{
 ?>
-<?php $options = get_option( APSL_SETTINGS ); ?>
 <?php
 	$current_url = APSL_Lite_Login_Check_Class::curPageURL();
 	$encoded_url = urlencode($current_url);

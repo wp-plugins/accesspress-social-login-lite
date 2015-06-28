@@ -59,6 +59,15 @@ if(isset($_POST['apsl_save_settings'])){
 	$apsl_settings['apsl_icon_theme'] = $_POST['apsl_icon_theme'];
 
 	$apsl_settings['apsl_title_text_field'] = $_POST['apsl_title_text_field'];
+	$apsl_settings['apsl_custom_logout_redirect_options'] = $_POST['apsl_custom_logout_redirect_options'];
+	$apsl_settings['apsl_custom_logout_redirect_link'] = $_POST['apsl_custom_logout_redirect_link'];
+
+	$apsl_settings['apsl_custom_login_redirect_options'] = $_POST['apsl_custom_login_redirect_options'];
+	$apsl_settings['apsl_custom_login_redirect_link'] = $_POST['apsl_custom_login_redirect_link'];
+
+	$apsl_settings['apsl_user_avatar_options'] = $_POST['apsl_user_avatar_options'];
+
+	$apsl_settings['apsl_send_email_notification_options'] =$_POST['apsl_send_email_notification_options'];
 
 	//for saving the settings
 	update_option( APSL_SETTINGS, $apsl_settings );

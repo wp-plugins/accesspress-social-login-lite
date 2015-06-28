@@ -380,7 +380,8 @@ input.apsl-reset-button.button.primary-button:hover {
 #tab-apsl-theme-settings input#apsl_each_link_title_attribute {
  
 }
-#tab-apsl-theme-settings span.apsl-info-note {
+
+/*#tab-apsl-theme-settings span.apsl-info-note {
   font-size: 13px;
   opacity: 0.5;
   font-style: italic;
@@ -388,7 +389,8 @@ input.apsl-reset-button.button.primary-button:hover {
   padding-top: -42px;
   margin-top: -19px;
   margin-bottom: 16px;
-}
+}*/
+
 #tab-apsl-theme-settings .apsl-each-link-title-attribute {
  
   padding-left: 7px;

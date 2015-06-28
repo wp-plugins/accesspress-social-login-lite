@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) or die( "No script kiddies please!" );
 Plugin name: AccessPress Social Login Lite
 Plugin URI: https://accesspressthemes.com/wordpress-plugins/accesspress-social-login-lite/
 Description: A plugin to add various social logins to a site.
-version: 1.0.1
+version: 1.0.2
 Author: AccessPress Themes
 Author URI: https://accesspressthemes.com/
 Text Domain: apsl-lite
@@ -14,7 +14,7 @@ License: GPLv2 or later
 
 //Declearation of the necessary constants for plugin
 if(!defined ( 'APSL_VERSION' ) ){
-	define ( 'APSL_VERSION', '1.0.1' );
+	define ( 'APSL_VERSION', '1.0.2' );
 }
 
 if( !defined( 'APSL_IMAGE_DIR' ) ){
@@ -89,9 +89,65 @@ if( !class_exists( 'APSL_Lite_Class' ) ){
 			add_action( 'login_enqueue_scripts', array($this, 'apsl_login_form__enqueue_script'), 1 );
 			add_action('admin_post_apsl_restore_default_settings',array($this,'apsl_restore_default_settings'));//restores default settings.
 
+			/**
+			 * Hook to display custom avatars
+			*/
+			add_filter ('get_avatar', array($this,'apsl_social_login_custom_avatar'), 10, 5);
+
 		}
 
 
+		function apsl_social_login_custom_avatar ($avatar, $mixed, $size, $default, $alt = '')
+		{
+				$options = get_option( APSL_SETTINGS );
+
+				//Check if we have an user identifier
+				if (is_numeric ($mixed) AND $mixed > 0)
+				{
+					$user_id = $mixed;
+				}
+
+				//Check if we have an user email
+				elseif (is_string ($mixed) AND ($user = get_user_by ('email', $mixed)))
+				{
+					$user_id = $user->ID;
+				}
+				//Check if we have an user object
+				elseif (is_object ($mixed) AND property_exists ($mixed, 'user_id') AND is_numeric ($mixed->user_id))
+				{
+					$user_id = $mixed->user_id;
+				}
+				//None found
+				else
+				{
+					$user_id = null;
+				}
+				
+				//User found?
+				if (!empty ($user_id))
+				{
+
+					//Override current avatar ?
+					$override_avatar = true;
+				
+						//Read the avatar
+						$user_meta_thumbnail 	= get_user_meta ($user_id, 'deuimage', true);
+						
+						//read user details
+						$user_meta_name 		= get_user_meta ($user_id, 'first_name', true);
+
+						if($options['apsl_user_avatar_options'] == 'social'){
+							$user_picture = (!empty ($user_meta_thumbnail) ? $user_meta_thumbnail : '');
+						
+							//Avatar found?
+							if ($user_picture !== false AND strlen (trim ($user_picture)) > 0)
+							{
+								return '<img alt="' . $user_meta_name . '" src="' . $user_picture . '" class="avatar apsl-avatar-social-login avatar-' . $size . ' photo" height="' . $size . '" width="' . $size . '" />';
+							}
+						}
+				}
+			return $avatar;
+		}
 		
 		//starts the session with the call of init hook
         function session_init() {

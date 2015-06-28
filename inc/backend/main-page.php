@@ -14,7 +14,7 @@
             <div class="apsl-social-bttns">
                 <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fpages%2FAccessPress-Themes%2F1396595907277967&amp;width&amp;layout=button&amp;action=like&amp;show_faces=false&amp;share=false&amp;height=35&amp;appId=1411139805828592" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:20px; width:50px " allowtransparency="true"></iframe>
                 &nbsp;&nbsp;
-                <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" src="http://platform.twitter.com/widgets/follow_button.5f46501ecfda1c3e1c05dd3e24875611.en.html#_=1421918256492&amp;dnt=true&amp;id=twitter-widget-0&amp;lang=en&amp;screen_name=apthemes&amp;show_count=false&amp;show_screen_name=true&amp;size=m" class="twitter-follow-button twitter-follow-button" title="Twitter Follow Button" data-twttr-rendered="true" style="width: 126px; height: 20px;"></iframe>
+                <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" src="//platform.twitter.com/widgets/follow_button.5f46501ecfda1c3e1c05dd3e24875611.en.html#_=1421918256492&amp;dnt=true&amp;id=twitter-widget-0&amp;lang=en&amp;screen_name=apthemes&amp;show_count=false&amp;show_screen_name=true&amp;size=m" class="twitter-follow-button twitter-follow-button" title="Twitter Follow Button" data-twttr-rendered="true" style="width: 126px; height: 20px;"></iframe>
                 <script>
                 !function (d, s, id) {
                         var js, fjs = d.getElementsByTagName(s)[0];
@@ -189,7 +189,7 @@ if(isset($_SESSION['apsl_message'])){ ?>
 					
 						<div class='apsl-settings'>
 							<div class='apsl-enable-disable-opt'>
-								<div class="apsl-label"><?php _e('Social Login', APSL_TEXT_DOMAIN ); ?> <span class='apsl_show_hide'><i class="fa fa-caret-down"></i></span> </div>
+								<div class="apsl-label"><?php _e('Social login', APSL_TEXT_DOMAIN ); ?> <span class='apsl_show_hide'><i class="fa fa-caret-down"></i></span> </div>
 								<div class='apsl_network_settings_wrapper' style='display:none'>
 									<p class="social-login">
 									<span><?php _e('Enable social login?', APSL_TEXT_DOMAIN ); ?></span>
@@ -231,12 +231,90 @@ if(isset($_SESSION['apsl_message'])){ ?>
 
 					<div class='apsl-settings'>
 						<div class='apsl-text-settings'>
-							<div class="apsl-label"><?php _e('Text Settings', APSL_TEXT_DOMAIN ); ?> <span class='apsl_show_hide'><i class="fa fa-caret-down"></i></span> </div>
-								<div class='apsl_network_settings_wrapper' style='display:none'>
+							<div class="apsl-label"><?php _e('Text settings', APSL_TEXT_DOMAIN ); ?> <span class='apsl_show_hide'><i class="fa fa-caret-down"></i></span> </div>
+							<div class='apsl_network_settings_wrapper' style='display:none'>
+								<p class='apsl-title-text-field'>
+									<span><?php _e('Login text:', APSL_TEXT_DOMAIN ); ?></span> <input type='text' name='apsl_title_text_field' id='apsl-title-text' value='<?php if(isset($options['apsl_title_text_field']) && $options['apsl_title_text_field'] !=''){ echo $options['apsl_title_text_field']; } ?>' />
+								</p>
+							</div>	
+						</div>
+					</div>
+
+					<div class='apsl-settings'>
+						<div class='apsl-logout-redirect-settings'>
+							<div class="apsl-label"><?php _e('Logout redirect link', APSL_TEXT_DOMAIN ); ?> <span class='apsl_show_hide'><i class="fa fa-caret-down"></i></span> </div>
+							<div class='apsl_network_settings_wrapper' style='display:none'>
+								<input type='radio' id='apsl_custom_logout_redirect_home' class='apsl_custom_logout_redirect_options' name='apsl_custom_logout_redirect_options' value='home' <?php if(isset($options['apsl_custom_logout_redirect_options'])){ checked( $options['apsl_custom_logout_redirect_options'], 'home', 'true' ); } ?> /> <label for='apsl_custom_logout_redirect_home'><?php _e('Home page', APSL_TEXT_DOMAIN ); ?></label><br /><br />
+			        			<input type='radio' id='apsl_custom_logout_redirect_current' class='apsl_custom_logout_redirect_options' name='apsl_custom_logout_redirect_options' value='current_page' <?php if(isset($options['apsl_custom_logout_redirect_options'])){ checked( $options['apsl_custom_logout_redirect_options'], 'current_page', 'true' ); } ?> /> <label for='apsl_custom_logout_redirect_current'><?php _e('Current page', APSL_TEXT_DOMAIN ); ?></label><br /><br />
+			        			
+
+			        			<input type='radio' id='apsl_custom_logout_redirect_custom' class='apsl_custom_logout_redirect_options' name='apsl_custom_logout_redirect_options' value='custom_page' <?php if(isset($options['apsl_custom_logout_redirect_options'])){ checked( $options['apsl_custom_logout_redirect_options'], 'custom_page', 'true' ); } ?> /> <label for='apsl_custom_logout_redirect_custom'><?php _e('Custom page', APSL_TEXT_DOMAIN ); ?></label><br />
+								
+								<div class='apsl-custom-logout-redirect-link' <?php if(isset($options['apsl_custom_logout_redirect_options'])){ if($options['apsl_custom_logout_redirect_options'] =='custom_page'){ ?> style='display: block' <?php }else{ ?> style='display:none' <?php } } ?>>
 									<p class='apsl-title-text-field'>
-										<span><?php _e('Login text:', APSL_TEXT_DOMAIN ); ?></span> <input type='text' name='apsl_title_text_field' id='apsl-title-text' value='<?php if(isset($options['apsl_title_text_field']) && $options['apsl_title_text_field'] !=''){ echo $options['apsl_title_text_field']; } ?>' />
+										<span><?php _e('Logout redirect page:', APSL_TEXT_DOMAIN ); ?></span> <input type='text' name='apsl_custom_logout_redirect_link' id='apsl-custom-logout-redirect-link' value='<?php if(isset($options['apsl_custom_logout_redirect_link']) && $options['apsl_custom_logout_redirect_link'] !=''){ echo $options['apsl_custom_logout_redirect_link']; } ?>' />
 									</p>
-								</div>	
+									<div class='apsl-info'>
+								 		<span class='apsl-info-note'><?php _e('Note:', APSL_TEXT_DOMAIN ); ?></span> <br />
+								 		<span class='apsl-info-content'>Please set this value if you want to redirect the user to the custom page url(full url). If this field is not set they will be redirected back to current page.</span>
+								 	</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class='apsl-settings'>
+						<div class='apsl-login-redirect-settings'>
+							<div class="apsl-label"><?php _e('Login redirect link', APSL_TEXT_DOMAIN ); ?> <span class='apsl_show_hide'><i class="fa fa-caret-down"></i></span> </div>
+							<div class='apsl_network_settings_wrapper' style='display:none'>
+								<input type='radio' id='apsl_custom_login_redirect_home' class='apsl_custom_login_redirect_options' name='apsl_custom_login_redirect_options' value='home' <?php if(isset($options['apsl_custom_login_redirect_options'])){ checked( $options['apsl_custom_login_redirect_options'], 'home', 'true' ); } ?> /> <label for='apsl_custom_login_redirect_home'><?php _e('Home page', APSL_TEXT_DOMAIN ); ?></label><br /><br />
+			        			<input type='radio' id='apsl_custom_login_redirect_current' class='apsl_custom_login_redirect_options' name='apsl_custom_login_redirect_options' value='current_page' <?php if(isset($options['apsl_custom_login_redirect_options'])){ checked( $options['apsl_custom_login_redirect_options'], 'current_page', 'true' ); } ?> /> <label for='apsl_custom_login_redirect_current'><?php _e('Current page', APSL_TEXT_DOMAIN ); ?></label><br /><br />
+			        			<div class='apsl-custom-login-redirect-link1' >
+									<div class='apsl-info'>
+								 		<span class='apsl-info-note'><?php _e('Note:', APSL_TEXT_DOMAIN ); ?></span> <br />
+								 		<span class='apsl-info-content'> If plugin can't detect what is the redirect uri for the page it will be redirected to home page.</span>
+								 	</div>
+								</div>
+			        			<input type='radio' id='apsl_custom_login_redirect_custom' class='apsl_custom_login_redirect_options' name='apsl_custom_login_redirect_options' value='custom_page' <?php if(isset($options['apsl_custom_login_redirect_options'])){ checked( $options['apsl_custom_login_redirect_options'], 'custom_page', 'true' ); } ?> /> <label for='apsl_custom_login_redirect_custom'><?php _e('Custom page', APSL_TEXT_DOMAIN ); ?></label><br />
+								
+								<div class='apsl-custom-login-redirect-link' <?php if(isset($options['apsl_custom_login_redirect_options'])) { if($options['apsl_custom_login_redirect_options'] =='custom_page'){ ?> style='display: block' <?php }else{ ?> style='display:none' <?php } } ?>>
+									<p class='apsl-title-text-field'>
+										<span><?php _e('Login redirect page:', APSL_TEXT_DOMAIN ); ?></span> <input type='text' name='apsl_custom_login_redirect_link' id='apsl-custom-login-redirect-link' value='<?php if(isset($options['apsl_custom_login_redirect_link']) && $options['apsl_custom_login_redirect_link'] !=''){ echo $options['apsl_custom_login_redirect_link']; } ?>' />
+									</p>
+									<div class='apsl-info'>
+								 		<span class='apsl-info-note'><?php _e('Note:', APSL_TEXT_DOMAIN ); ?></span> <br />
+								 		<span class='apsl-info-content'>Please set this value if you want to redirect the user to the custom page url(full url). If this field is not set they will be redirected back to home page.</span>
+								 	</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class='apsl-settings'>
+						<div class='apsl-user-avatar-settings'>
+							<div class="apsl-label"><?php _e('User avatar', APSL_TEXT_DOMAIN ); ?> <span class='apsl_show_hide'><i class="fa fa-caret-down"></i></span> </div>
+							<div class='apsl_network_settings_wrapper' style='display:none'>
+								<input type='radio' id='apsl_user_avatar_default' class='apsl_user_avatar_options' name='apsl_user_avatar_options' value='default' <?php if(isset($options['apsl_user_avatar_options'])){ checked( $options['apsl_user_avatar_options'], 'default', 'true' ); } ?> /> <label for='apsl_user_avatar_default'><?php _e('Use wordpress provided default avatar.', APSL_TEXT_DOMAIN ); ?></label><br /><br />
+			        			<input type='radio' id='apsl_user_avatar_social' class='apsl_user_avatar_options' name='apsl_user_avatar_options' value='social' <?php if(isset($options['apsl_user_avatar_options'])){ checked( $options['apsl_user_avatar_options'], 'social', 'true' ); } ?> /> <label for='apsl_user_avatar_social'><?php _e('Use the profile picture from social media where available.', APSL_TEXT_DOMAIN ); ?></label><br /><br />
+									<div class='apsl-info'>
+								 		<span class='apsl-info-note'><?php _e('Note:', APSL_TEXT_DOMAIN ); ?></span> <br />
+								 		<span class='apsl-info-content'>Please choose the options from where you want your users avatar to be loaded from. If you choose default wordpress avatar it will use the gravatar profile image if user have gravatar profile assocated with their registered email address.</span>
+								 	</div>
+							</div>
+						</div>
+					</div>
+
+					<div class='apsl-settings'>
+						<div class='apsl-user-email-settings'>
+							<div class="apsl-label"><?php _e('Email notification settings', APSL_TEXT_DOMAIN ); ?> <span class='apsl_show_hide'><i class="fa fa-caret-down"></i></span> </div>
+							<div class='apsl_network_settings_wrapper' style='display:none'>
+								<input type='radio' id='apsl_send_email_notification_yes' class='apsl_send_email_notification_yes' name='apsl_send_email_notification_options' value='yes' <?php if(isset($options['apsl_send_email_notification_options'])){ checked( $options['apsl_send_email_notification_options'], 'yes', 'true' ); } ?> /> <label for='apsl_send_email_notification_yes'><?php _e('Send email notification to both user and site admin.', APSL_TEXT_DOMAIN ); ?></label><br /><br />
+			        			<input type='radio' id='apsl_send_email_notification_no' class='apsl_send_email_notification_no' name='apsl_send_email_notification_options' value='no' <?php if(isset($options['apsl_send_email_notification_options'])){ checked( $options['apsl_send_email_notification_options'], 'no', 'true' ); } ?> /> <label for='apsl_send_email_notification_no'><?php _e('Do not send email notification to both user and site admin.', APSL_TEXT_DOMAIN ); ?></label><br /><br />
+									<div class='apsl-info'>
+								 		<span class='apsl-info-note'><?php _e('Note:', APSL_TEXT_DOMAIN ); ?></span> <br />
+								 		<span class='apsl-info-content'>Please choose the options from where you want your users avatar to be loaded from. If you choose default wordpress avatar it will use the gravatar profile image if user have gravatar profile assocated with their registered email address.</span>
+								 	</div>
+							</div>
 						</div>
 					</div>
 

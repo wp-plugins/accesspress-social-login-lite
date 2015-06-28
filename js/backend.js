@@ -27,4 +27,22 @@ jQuery(document).ready(function($){
         });
     });
 
+        // for hide show options based on logout redirect options
+    $('.apsl_custom_logout_redirect_options').click(function(){
+       if($(this).val()==='custom_page') {
+            $('.apsl-custom-logout-redirect-link').show('slow');
+        }else{
+            $('.apsl-custom-logout-redirect-link').hide('show');
+        }
+    });
+
+        // for hide show options based on logout redirect options
+    $('.apsl_custom_login_redirect_options').click(function(){
+       if($(this).val()==='custom_page') {
+            $('.apsl-custom-login-redirect-link').show('slow');
+        }else{
+            $('.apsl-custom-login-redirect-link').hide('show');
+        }
+    });
+
 });

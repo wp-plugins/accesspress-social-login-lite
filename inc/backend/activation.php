@@ -37,6 +37,16 @@ $apsl_settings['apsl_display_options'] =$display_options;
 $apsl_settings['apsl_icon_theme'] = '1';
 
 $apsl_settings['apsl_title_text_field'] = 'Social connect:';
+$apsl_settings['apsl_custom_logout_redirect_options'] = 'home';
+$apsl_settings['apsl_custom_logout_redirect_link'] ='';
+
+$apsl_settings['apsl_custom_login_redirect_options'] = 'home';
+$apsl_settings['apsl_custom_login_redirect_link'] = '';
+
+$apsl_settings['apsl_user_avatar_options'] = 'default';
+
+$apsl_settings['apsl_send_email_notification_options'] = 'yes';
+
 
 update_option( APSL_SETTINGS, $apsl_settings );
 ?>
