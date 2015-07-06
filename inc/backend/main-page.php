@@ -94,7 +94,7 @@ if(isset($_SESSION['apsl_message'])){ ?>
 												<li>Add the required informations and don't forget to make your app live. This is very important otherwise your app will not work for all users.</li>
 												<li>Then Click the "Create App" button and follow the instructions, your new app will be created. </li>
 												<li>Copy and Paste "App ID" and "App Secret" here.</li>
-												<li>Site url: <?php echo site_url(); ?></li>
+												<li>Site url: <input type='text' value='<?php echo site_url(); ?>' readonly='readonly' /></li>
 											</ul>
 										</div>
 									</div>
@@ -128,8 +128,8 @@ if(isset($_SESSION['apsl_message'])){ ?>
 										 		<li>Click on Create New App button. A new application details form will appear. Please fill up the application details and click on "create your twitter application" button.</li>
 										 		<li>Please note that before creating twiiter API application, You must add your mobile phone to your Twitter profile.</li>
 										 		<li>After successful creation of the app. Please go to "Keys and Access Tokens" tabs and get Consumer key(API Key) and Consumer secret(API secret).</li>
-										 		<li>Website: <?php echo site_url(); ?></li>
-										 		<li>Callback URL: <?php echo site_url(); ?></li>
+										 		<li>Website: <input type='text' value='<?php echo site_url(); ?>' readonly='readonly'/></li>
+										 		<li>Callback URL: <input type='text' value='<?php echo site_url(); ?>' readonly='readonly'/></li>
 									 		</ul>
 
 									 	</div>
@@ -167,8 +167,11 @@ if(isset($_SESSION['apsl_message'])){ ?>
 										 		<li>Get the client ID and client secret.</li>
 										 		<li>Now go to APIs > Social APIs > Google+ API and enable it. It is very important to enable it for the google login to work.</li>
 										 		<li>Rediret uri setup:<br />
-										 			Please use <?php echo site_url(); ?>/wp-login.php?apsl_login_id=google_check - for wordpress login page.<br />
-										 		<?php echo site_url(); ?>/index.php?apsl_login_id=google_check - if you have used the shortcode or widget in frontend.
+										 			Please use <input type='text' value='<?php echo site_url(); ?>/wp-login.php?apsl_login_id=google_check' readonly='readonly'/> - for wordpress login page.<br />
+										 			Please use <input type='text' value='<?php echo site_url(); ?>/index.php?apsl_login_id=google_check' readonly='readonly'/> - if you have used the shortcode or widget in frontend.
+										 		</li>
+										 		<li>
+										 			Please note: Make sure to check the protocol "http://" or "https://" as google checks protocol as well. Better to add both URL in the list if you site is https so that google social login work properly for both https and http browser.
 										 		</li>
 									 		</ul>
 									 	</div>
@@ -180,7 +183,7 @@ if(isset($_SESSION['apsl_message'])){ ?>
 								 echo "should not reach here";
 								 break;
 
-								} ?> 
+								} ?>
 						<?php endforeach; ?>
 					</div>	
 				</div>
@@ -312,7 +315,7 @@ if(isset($_SESSION['apsl_message'])){ ?>
 			        			<input type='radio' id='apsl_send_email_notification_no' class='apsl_send_email_notification_no' name='apsl_send_email_notification_options' value='no' <?php if(isset($options['apsl_send_email_notification_options'])){ checked( $options['apsl_send_email_notification_options'], 'no', 'true' ); } ?> /> <label for='apsl_send_email_notification_no'><?php _e('Do not send email notification to both user and site admin.', APSL_TEXT_DOMAIN ); ?></label><br /><br />
 									<div class='apsl-info'>
 								 		<span class='apsl-info-note'><?php _e('Note:', APSL_TEXT_DOMAIN ); ?></span> <br />
-								 		<span class='apsl-info-content'>Please choose the options from where you want your users avatar to be loaded from. If you choose default wordpress avatar it will use the gravatar profile image if user have gravatar profile assocated with their registered email address.</span>
+								 		<span class='apsl-info-content'>Here you can configure an options to send email notifications about user registration to site admin and user.</span>
 								 	</div>
 							</div>
 						</div>
