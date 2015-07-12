@@ -4,7 +4,7 @@ Tags: social,  login, social login, facebook, twitter, google, social connect, s
 Donate link: http://accesspressthemes.com/donation/
 Requires at least: 3.8
 Tested up to: 4.2
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,7 +71,7 @@ For more features upgrade to PRO version
 		- Wordpress
 		- Buffer
 
-	★ 16 Beautiful design templates.
+	★ 15 Beautiful design templates.
 
 	★ Works with Woocommerce.
 
@@ -131,6 +131,10 @@ Yes. You can use the AccessPress social login lite anywhere by using shortcode i
 4. Backend Other settings Section.
 
 == Changelog ==
+= 1.0.4 =
+* Addition of the pluggable function wp_new_user_notification for custom email messages.
+* Addition of the additional info for making the facebook app live.
+
 = 1.0.3 =
 * Made the Redirect uri's selectable for each social medias.
 

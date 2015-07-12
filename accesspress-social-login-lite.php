@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) or die( "No script kiddies please!" );
 Plugin name: AccessPress Social Login Lite
 Plugin URI: https://accesspressthemes.com/wordpress-plugins/accesspress-social-login-lite/
 Description: A plugin to add various social logins to a site.
-version: 1.0.3
+version: 1.0.4
 Author: AccessPress Themes
 Author URI: https://accesspressthemes.com/
 Text Domain: apsl-lite
@@ -14,7 +14,7 @@ License: GPLv2 or later
 
 //Declearation of the necessary constants for plugin
 if(!defined ( 'APSL_VERSION' ) ){
-	define ( 'APSL_VERSION', '1.0.3' );
+	define ( 'APSL_VERSION', '1.0.4' );
 }
 
 if( !defined( 'APSL_IMAGE_DIR' ) ){
@@ -51,6 +51,37 @@ if(!defined('APSL_PLUGIN_DIR')){
  * */
 include_once('inc/backend/widget.php');
 
+// Redefine user notification function
+    function wp_new_user_notification( $user_id, $plaintext_pass = '' ) {
+        $user = new WP_User($user_id);
+
+        $user_login = stripslashes($user->user_login);
+        $user_email = stripslashes($user->user_email);
+
+        $message  = sprintf(__('New user registration on your site %s:'), get_option('blogname')) . "\r\n\r\n";
+        $message .= sprintf(__('Username: %s'), $user_login) . "\r\n\r\n";
+        $message .= sprintf(__('E-mail: %s'), $user_email) . "\r\n";
+        $message .= __('Thanks!');
+
+        $headers = 'From:'.get_option('blogname').' <'.get_option('admin_email').'>' . "\r\n";
+        @wp_mail(get_option('admin_email'), sprintf(__('[%s] New User Registration'), get_option('blogname')), $message, $headers);
+
+        if ( empty($plaintext_pass) )
+            return;
+
+        $message  = __('Hi there,') . "\r\n\r\n";
+        $message .= sprintf(__("Welcome to %s! Here's how to log in:"), get_option('blogname')) . "\r\n\r\n";
+        $message .= wp_login_url() . "\r\n";
+        $message .= sprintf(__('Username: %s'), $user_login) . "\r\n";
+        $message .= sprintf(__('Password: %s'), $plaintext_pass) . "\r\n\r\n";
+        $message .= sprintf(__('If you have any problems, please contact me at %s.'), get_option('admin_email')) . "\r\n\r\n";
+        $message .= __('Thanks!');
+
+        $headers = 'From:'.get_option('blogname').' <'.get_option('admin_email').'>' . "\r\n";
+
+        wp_mail($user_email, sprintf(__('[%s] Your username and password'), get_option('blogname')), $message, $headers);
+
+    }
 
 // Declaration of the class
 if( !class_exists( 'APSL_Lite_Class' ) ){
@@ -95,7 +126,6 @@ if( !class_exists( 'APSL_Lite_Class' ) ){
 			add_filter ('get_avatar', array($this,'apsl_social_login_custom_avatar'), 10, 5);
 
 		}
-
 
 		function apsl_social_login_custom_avatar ($avatar, $mixed, $size, $default, $alt = '')
 		{
