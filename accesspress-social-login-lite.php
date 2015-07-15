@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) or die( "No script kiddies please!" );
 Plugin name: AccessPress Social Login Lite
 Plugin URI: https://accesspressthemes.com/wordpress-plugins/accesspress-social-login-lite/
 Description: A plugin to add various social logins to a site.
-version: 1.0.4
+version: 1.0.5
 Author: AccessPress Themes
 Author URI: https://accesspressthemes.com/
 Text Domain: apsl-lite
@@ -14,7 +14,7 @@ License: GPLv2 or later
 
 //Declearation of the necessary constants for plugin
 if(!defined ( 'APSL_VERSION' ) ){
-	define ( 'APSL_VERSION', '1.0.4' );
+	define ( 'APSL_VERSION', '1.0.5' );
 }
 
 if( !defined( 'APSL_IMAGE_DIR' ) ){
@@ -52,6 +52,7 @@ if(!defined('APSL_PLUGIN_DIR')){
 include_once('inc/backend/widget.php');
 
 // Redefine user notification function
+if(!function_exists('wp_new_user_notification')){
     function wp_new_user_notification( $user_id, $plaintext_pass = '' ) {
         $user = new WP_User($user_id);
 
@@ -82,6 +83,7 @@ include_once('inc/backend/widget.php');
         wp_mail($user_email, sprintf(__('[%s] Your username and password'), get_option('blogname')), $message, $headers);
 
     }
+}
 
 // Declaration of the class
 if( !class_exists( 'APSL_Lite_Class' ) ){
