@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) or die( "No script kiddies please!" );
 Plugin name: AccessPress Social Login Lite
 Plugin URI: https://accesspressthemes.com/wordpress-plugins/accesspress-social-login-lite/
 Description: A plugin to add various social logins to a site.
-version: 1.0.5
+version: 1.0.6
 Author: AccessPress Themes
 Author URI: https://accesspressthemes.com/
 Text Domain: apsl-lite
@@ -14,7 +14,7 @@ License: GPLv2 or later
 
 //Declearation of the necessary constants for plugin
 if(!defined ( 'APSL_VERSION' ) ){
-	define ( 'APSL_VERSION', '1.0.5' );
+	define ( 'APSL_VERSION', '1.0.6' );
 }
 
 if( !defined( 'APSL_IMAGE_DIR' ) ){
@@ -33,15 +33,15 @@ if( !defined( 'APSL_LANG_DIR' ) ){
 	define ( 'APSL_LANG_DIR', basename( dirname( __FILE__ ) ). '/languages/' );
 }
 
-if(!defined('APSL_TEXT_DOMAIN')){
+if( !defined('APSL_TEXT_DOMAIN' )){
 	define( 'APSL_TEXT_DOMAIN', 'apsl-lite' );
 }
 
-if(!defined('APSL_SETTINGS')){
+if( !defined('APSL_SETTINGS' )){
 	define('APSL_SETTINGS', 'apsl-lite-settings');
 }
 
-if(!defined('APSL_PLUGIN_DIR')){
+if( !defined('APSL_PLUGIN_DIR' )){
 	define('APSL_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 }
 
@@ -49,10 +49,10 @@ if(!defined('APSL_PLUGIN_DIR')){
 /**
  * Register a widget
  * */
-include_once('inc/backend/widget.php');
+include_once( 'inc/backend/widget.php' );
 
 // Redefine user notification function
-if(!function_exists('wp_new_user_notification')){
+if(!function_exists( 'wp_new_user_notification' )){
     function wp_new_user_notification( $user_id, $plaintext_pass = '' ) {
         $user = new WP_User($user_id);
 

@@ -1,3 +1,4 @@
+<?php defined('ABSPATH') or die("No script kiddies please!"); ?>
 <div class="wrap"><div class='apsl-outer-wrapper'>
 
 <div class="apsl-setting-header clearfix">

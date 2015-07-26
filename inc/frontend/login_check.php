@@ -1,6 +1,5 @@
 <?php defined( 'ABSPATH' ) or die( "No script kiddies please!" ); ?>
 <?php
-
 if( !class_exists( 'APSL_Lite_Login_Check_Class' ) ){
 	class APSL_Lite_Login_Check_Class{
 

@@ -1,5 +1,5 @@
+<?php defined('ABSPATH') or die("No script kiddies please!"); ?>
 <?php $options = get_option( APSL_SETTINGS ); ?>
-
 <div class='apsl-login-networks theme-<?php echo $options['apsl_icon_theme']; ?> clearfix'>
 	<span class='apsl-login-new-text'><?php echo $options['apsl_title_text_field']; ?></span>	
 	<?php if( isset($_REQUEST['error']) || isset($_REQUEST['denied']) ){ ?> 

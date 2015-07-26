@@ -1,4 +1,3 @@
-<?php defined('ABSPATH') or die("No script kiddies please!"); ?>
 <p>There are 2 main settings tabs that will help you to setup the plugin to work properly.</p>
 <dl>
   <dt><strong>Network Settings:</strong></dt>
