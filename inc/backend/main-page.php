@@ -90,6 +90,7 @@ if(isset($_SESSION['apsl_message'])){ ?>
 											<span class='apsl-info-content'>You need to create a new facebook API Applitation to setup facebook login. Please follow the instructions to create new app.</span>
 											<br />
 											<ul class='apsl-info-lists'>
+											    <li><b>Please note:</b> We have now updated our facbook sdk version to 5.0 so to make the facebook login work you need to have PHP version 5.4 at least.</li>
 												<li>Go to <a href='https://developers.facebook.com/apps' target='_blank'>https://developers.facebook.com/apps</a>.</li>
 												<li>Click on 'Add a New App' button. A popup will open. Then choose website.</li>
 												<li>Add the required informations and don't forget to make your app live. This is very important otherwise your app will not work for all users.</li>

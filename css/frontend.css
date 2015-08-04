@@ -541,3 +541,5 @@ span.apsl-login-new-text{
   margin-bottom: 10px;
   display: block;
 }
+
+.apsl-icon-block:before{ display:none !important}

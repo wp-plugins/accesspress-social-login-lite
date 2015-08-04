@@ -9,7 +9,11 @@ function __construct(){
 		$exploder=explode( '_', $_GET['apsl_login_id'] );
 		switch($exploder[0]){
 			case 'facebook':
-				include( APSL_PLUGIN_DIR.'facebook/src/facebook.php' );
+				//include( APSL_PLUGIN_DIR.'facebook/src/facebook.php' );
+				if (version_compare(PHP_VERSION, '5.4.0', '<')) {
+				   echo _e('The Facebook SDK requires PHP version 5.4 or higher. Please notify about this error to site admin.', APSL_TEXT_DOMAIN );
+					die();
+				}
 				$this->onFacebookLogin();
 				break;
 
@@ -62,15 +66,19 @@ function onFacebookLogin(){
 			$site 		= $this->siteUrl();
 			$callBackUrl= $this->callBackUrl();
 			$response 	= new stdClass();
+			$return_user_details = new stdClass();
 			$exploder=explode('_', $_GET['apsl_login_id']);
 			$action		= $exploder[1];
 			$options = get_option( APSL_SETTINGS );
 			$config = array(
-				  'appId' => $options['apsl_facebook_settings']['apsl_facebook_app_id'],
-				  'secret' => $options['apsl_facebook_settings']['apsl_facebook_app_secret']
-			  );
+							  'app_id' 					=> $options['apsl_facebook_settings']['apsl_facebook_app_id'],
+							  'app_secret' 				=> $options['apsl_facebook_settings']['apsl_facebook_app_secret'],
+							  'default_graph_version' 	=> 'v2.4'
+					  	  );
 			
-			$facebook = new Facebook($config);
+			include( APSL_PLUGIN_DIR.'facebook/autoload.php' );
+			$fb = new Facebook\Facebook($config);
+			
 			$encoded_url = isset($_GET['redirect_to']) ? $_GET['redirect_to'] : '';
 
 			if(isset($encoded_url) && $encoded_url !=''){
@@ -80,55 +88,90 @@ function onFacebookLogin(){
 			}
 
 			if ($action == 'login'){
-				$loginUrl = $facebook->getLoginUrl(array('redirect_uri'=>$callback, 'scope'=>'email'));
-				$this->redirect($loginUrl);
-				exit(); 
+					// Well looks like we are a fresh dude, login to Facebook!
+				    $helper = $fb->getRedirectLoginHelper();
+				    $permissions = array('email', 'public_profile'); // optional
+				    $loginUrl = $helper->getLoginUrl($callback, $permissions);
+				    $this->redirect($loginUrl);
 			}else{
-				if(isset($_REQUEST['error'])){
-				$response->status 		= 'ERROR';
-				$response->error_code 	= 2;
-				$response->error_message= 'INVALID AUTHORIZATION';
-				return $response;
-				die();
-				}
-
-				$user = $facebook->getUser();
-				if ($user){
-				  	try {// Proceed knowing you have a logged in user who's authenticated.
-						$user_profile = $facebook->api('/me');
-				  	} catch (FacebookApiException $e) {
-						error_log($e);
-						$user = null;
-				  	}
-				}
-
-				if($user!=null){
-					$response->status 		= 'SUCCESS';
-					$response->deuid		= $user_profile['id'];
-					$response->deutype		= 'facebook';
-					$response->first_name	= $user_profile['first_name'];
-					$response->last_name	= $user_profile['last_name'];
-					$response->email		= $user_profile['email'];
-					$response->username		= $user_profile['email'];
-					$response->gender 		= $user_profile['gender'];
-					$response->url 			= $user_profile['link'];
-					$response->about 		= ''; //facebook doesn't return user about details.
-					$headers = get_headers('https://graph.facebook.com/'.$user_profile['id'].'/picture',1);
-					
-					// just a precaution, check whether the header isset...
-					if(isset($headers['Location'])) {
-						$response->deuimage = $headers['Location']; // string
-					} else {
-						$response->deuimage = false; // nothing there? .. weird, but okay!
-					}
-					$response->error_message = '';
-				}else{
+					if(isset($_REQUEST['error'])){
 					$response->status 		= 'ERROR';
 					$response->error_code 	= 2;
 					$response->error_message= 'INVALID AUTHORIZATION';
-				}
+					return $response;
+					die();
+					}
+					if (isset($_REQUEST['code'])) {
+					        $helper = $fb->getRedirectLoginHelper();
+					        try {
+					            $accessToken = $helper->getAccessToken();
+					        } catch(Facebook\Exceptions\FacebookResponseException $e) {
+					              
+					              // When Graph returns an error
+					              echo 'Graph returned an error: ' . $e->getMessage();
+					              exit;
+					        } catch(Facebook\Exceptions\FacebookSDKException $e) {
+					              
+					              // When validation fails or other local issues
+					              echo 'Facebook SDK returned an error: ' . $e->getMessage();
+					            exit;
+					        }
+
+				        	if (isset($accessToken)) {
+				              	// Logged in!
+				              	$_SESSION['facebook_access_token'] = (string) $accessToken;
+							  	$fb->setDefaultAccessToken($accessToken);
+
+								try {
+								  $response = $fb->get('/me?fields=email,name, first_name, last_name, gender, link, about, address, bio, birthday, education, hometown, is_verified, languages, location, website');
+								  $userNode = $response->getGraphUser();
+								} catch(Facebook\Exceptions\FacebookResponseException $e) {
+								  // When Graph returns an error
+								  echo 'Graph returned an error: ' . $e->getMessage();
+								  exit;
+								} catch(Facebook\Exceptions\FacebookSDKException $e) {
+								  // When validation fails or other local issues
+								  echo 'Facebook SDK returned an error: ' . $e->getMessage();
+								  exit;
+								}
+
+						        $user_profile = $this->accessProtected($userNode, 'items');
+					          	if($user_profile!=null){
+									$return_user_details->status 		= 'SUCCESS';
+									$return_user_details->deuid		= $user_profile['id'];
+									$return_user_details->deutype		= 'facebook';
+									$return_user_details->first_name	= $user_profile['first_name'];
+									$return_user_details->last_name	= $user_profile['last_name'];
+									$return_user_details->email		= $user_profile['email'];
+									$return_user_details->username		= $user_profile['email'];
+									$return_user_details->gender 		= $user_profile['gender'];
+									$return_user_details->url 			= $user_profile['link'];
+									$return_user_details->about 		= ''; //facebook doesn't return user about details.
+									$headers = get_headers('https://graph.facebook.com/'.$user_profile['id'].'/picture',1);
+									
+									// just a precaution, check whether the header isset...
+									if(isset($headers['Location'])) {
+										$return_user_details->deuimage = $headers['Location']; // string
+									} else {
+										$return_user_details->deuimage = false; // nothing there? .. weird, but okay!
+									}
+									$return_user_details->error_message = '';
+									}else{
+										$return_user_details->status 		= 'ERROR';
+										$return_user_details->error_code 	= 2;
+										$return_user_details->error_message= 'INVALID AUTHORIZATION';
+									}
+				        	}
+					} else {
+					    // Well looks like we are a fresh dude, login to Facebook!
+					    $helper = $fb->getRedirectLoginHelper();
+					    $permissions = array('email', 'public_profile'); // optional
+					    $loginUrl = $helper->getLoginUrl($callback, $permissions);
+					    $this->redirect($loginUrl);
+					}
+
 			}
-			return $response;
+			return $return_user_details;
 	}
 
 
@@ -545,7 +588,7 @@ function loginUser($user_id){
 }
 
     //returns the current page url
-        function curPageURL() {
+        Public static function curPageURL() {
             $pageURL = 'http';
             if ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ) {
                 $pageURL .= "s";
