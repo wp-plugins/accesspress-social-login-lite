@@ -419,7 +419,7 @@ function siteUrl(){
 function callBackUrl(){
 	$connection = !empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
 	$url = $connection . $_SERVER["HTTP_HOST"] . $_SERVER["PHP_SELF"];
-	if(strpos($url, '?')===false){
+	if( strpos($url, '?')===false ){
 		$url .= '?';
 	}else{
 		$url .= '&';
@@ -434,7 +434,7 @@ function get_json_values( $url ){
     return $json_response;
 }
 
-function redirect($redirect){
+function redirect( $redirect ){
 	if (headers_sent()){ // Use JavaScript to redirect if content has been previously sent (not recommended, but safe)
 		echo '<script language="JavaScript" type="text/javascript">window.location=\'';
 		echo $redirect;
@@ -588,19 +588,19 @@ function loginUser($user_id){
 }
 
     //returns the current page url
-        Public static function curPageURL() {
-            $pageURL = 'http';
-            if ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ) {
-                $pageURL .= "s";
-            }
-            $pageURL .= "://";
-            if ( $_SERVER["SERVER_PORT"] != "80" ) {
-                $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
-            } else {
-                $pageURL .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
-            }
-            return $pageURL;
+    Public static function curPageURL() {
+        $pageURL = 'http';
+        if ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ) {
+            $pageURL .= "s";
         }
+        $pageURL .= "://";
+        if ( $_SERVER["SERVER_PORT"] != "80" ) {
+            $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
+        } else {
+            $pageURL .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+        }
+        return $pageURL;
+    }
 
     //function to access the protected object properties
     function accessProtected($obj, $prop) { 

@@ -1,7 +1,7 @@
 <?php defined('ABSPATH') or die("No script kiddies please!"); ?>
 <?php
 	$apsl_settings= array();
-	$apsl_settings['network_ordering'] = $_POST['network_ordering'];
+	$apsl_settings['network_ordering'] 					= $_POST['network_ordering'];
 
 	//for facebook settings
 	foreach ($_POST['apsl_facebook_settings'] as $key => $value) {
@@ -28,7 +28,7 @@
 		'apsl_twitter_api_secret'=>$apsl_twitter_api_secret
 		);
 
-	$apsl_settings['apsl_twitter_settings'] = $twitter_parameters;
+	$apsl_settings['apsl_twitter_settings'] 				= $twitter_parameters;
 
 	//for google settings
 	foreach ($_POST['apsl_google_settings'] as $key => $value) {
