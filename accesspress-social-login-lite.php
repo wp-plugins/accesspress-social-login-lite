@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) or die( "No script kiddies please!" );
 Plugin name: AccessPress Social Login Lite
 Plugin URI: https://accesspressthemes.com/wordpress-plugins/accesspress-social-login-lite/
 Description: A plugin to add various social logins to a site.
-version: 1.0.9
+version: 2.0.0
 Author: AccessPress Themes
 Author URI: https://accesspressthemes.com/
 Text Domain: apsl-lite
@@ -14,7 +14,7 @@ License: GPLv2 or later
 
 //Declearation of the necessary constants for plugin
 if(!defined ( 'APSL_VERSION' ) ){
-	define ( 'APSL_VERSION', '1.0.9' );
+	define ( 'APSL_VERSION', '2.0.0' );
 }
 
 if( !defined( 'APSL_IMAGE_DIR' ) ){
@@ -108,7 +108,7 @@ if( !class_exists( 'APSL_Lite_Class' ) ){
             	if( in_array("register_form", $options['apsl_display_options']) ) {
 	            	add_action( 'register_form', array($this, 'add_social_login') ); //add the social logins to the registration form
 					add_action('after_signup_form', array($this,'add_social_login') );
-	            }	
+	            }
 
             	if( in_array( "comment_form", $options['apsl_display_options'] ) ) {
 	            	add_action( 'comment_form_top', array($this, 'add_social_login_form_to_comment') ); //add the social logins to the comment form
@@ -197,7 +197,6 @@ if( !class_exists( 'APSL_Lite_Class' ) ){
 
 		//loads the text domain for translation
 		function plugin_text_domain(){
-
 			load_plugin_textdomain( APSL_TEXT_DOMAIN, false, APSL_LANG_DIR );
 		}
 
@@ -256,7 +255,7 @@ if( !class_exists( 'APSL_Lite_Class' ) ){
 
 		//function to add the social login in the comment form.
 		function add_social_login_form_to_comment(){ ?>
-		<?php 
+		<?php
 			$options = get_option( APSL_SETTINGS );
 			$login_text = $options['apsl_title_text_field'];
 		if (!is_user_logged_in()){ ?>

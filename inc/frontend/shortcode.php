@@ -5,7 +5,12 @@ if (is_user_logged_in()){
 	global $current_user;
 	$user_info 	= "<span class='display-name'>{$current_user->data->display_name}</span>&nbsp;";
 	$user_info  .= get_avatar( $current_user->ID, 20 );
+	
+	if( !empty( $_GET[ 'redirect' ] ))
+		$current_url = $_GET[ 'redirect' ];
+	else
 	$current_url = APSL_Lite_Login_Check_Class::curPageURL();
+
 	if(isset($options['apsl_custom_logout_redirect_options']) && $options['apsl_custom_logout_redirect_options'] !=''){
 		if($options['apsl_custom_logout_redirect_options'] =='home'){
 			$user_logout_url = wp_logout_url( home_url() );

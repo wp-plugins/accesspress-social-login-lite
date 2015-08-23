@@ -511,6 +511,7 @@ if( !class_exists( 'APSL_Lite_Login_Check_Class' ) ){
         function creatUser($user_name, $user_email){
             $random_password = wp_generate_password(12, false);
             $user_id = wp_create_user( $user_name, $random_password, $user_email );
+            do_action( 'APSL_createUser', $user_id ); //hookable function to perform additional work after creation of user.
             $options = get_option( APSL_SETTINGS );
             if($options['apsl_send_email_notification_options'] == 'yes'){
                 wp_new_user_notification( $user_id, $random_password );
