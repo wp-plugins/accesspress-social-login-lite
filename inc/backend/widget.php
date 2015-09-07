@@ -97,8 +97,4 @@ class APSL_Lite_Widget extends WP_Widget {
         return $instance;
     }
 
-
-
 }
-
-?>

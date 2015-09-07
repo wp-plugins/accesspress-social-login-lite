@@ -29,6 +29,7 @@ $google_parameters = array(
     'apsl_google_client_id' => '',
     'apsl_google_client_secret' => ''
 );
+
 $apsl_settings['apsl_google_settings'] = $google_parameters;
 
 $apsl_settings['apsl_enable_disable_plugin'] = 'yes';

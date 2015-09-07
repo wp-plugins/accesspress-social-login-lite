@@ -19,7 +19,6 @@ if (!class_exists('APSL_Lite_Login_Check_Class')) {
                 $exploder = explode('_', $_GET['apsl_login_id']);
                 switch ($exploder[0]) {
                     case 'facebook':
-                        //include( APSL_PLUGIN_DIR.'facebook/src/facebook.php' );
                         if (version_compare(PHP_VERSION, '5.4.0', '<')) {
                             echo _e('The Facebook SDK requires PHP version 5.4 or higher. Please notify about this error to site admin.', APSL_TEXT_DOMAIN);
                             die();
@@ -357,11 +356,7 @@ if (!class_exists('APSL_Lite_Login_Check_Class')) {
                     $this->redirect($authUrl);
                     die();
                 } else {
-                    // if($encoded_url == ''){
-                    //     $this->redirect($redirect_uri);
-                    // }else{
                     $this->redirect($redirect_uri . "&redirect_to=$encoded_url");
-                    // }
                     die();
                 }
             } elseif (isset($_GET['code'])) {  // Perform HTTP Request to OpenID server to validate key
@@ -612,9 +607,7 @@ if (!class_exists('APSL_Lite_Login_Check_Class')) {
             return $property->getValue($obj);
         }
 
-    }
-
-    //termination of a class
+    }//termination of a class
 } //end of if statement
 
 $apsl_login_check = new APSL_Lite_Login_Check_Class();

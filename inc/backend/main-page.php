@@ -43,10 +43,7 @@
 
         <?php if (isset($_SESSION['apsl_message'])) { ?>
             <div class="apsl-message">
-                <p><?php
-        echo $_SESSION['apsl_message'];
-        unset($_SESSION['apsl_message']);
-            ?></p>
+                <p> <?php echo $_SESSION['apsl_message'];  unset($_SESSION['apsl_message']); ?> </p>
             </div>
         <?php } ?>
         <div class='apsl-networks'>
@@ -235,7 +232,7 @@
                                         <p><input type="checkbox" id="apsl_comment_form" value="comment_form" name="apsl_display_options[]" <?php if (in_array("comment_form", $options['apsl_display_options'])) {
                                             echo "checked='checked'";
                                         } ?> ><label for="apsl_comment_form"><?php _e('Comments', APSL_TEXT_DOMAIN); ?> </label></p>
-                                    </div>	
+                                    </div>
                                 </div>
                             </div>
 
@@ -243,7 +240,7 @@
                                 <div class='apsl-themes-wrapper'>
                                     <div class="apsl-label"><?php _e('Available icon themes', APSL_TEXT_DOMAIN); ?> <span class='apsl_show_hide'><i class="fa fa-caret-down"></i></span> </div>
                                     <div class='apsl_network_settings_wrapper' style='display:none'>
-<?php for ($i = 1; $i <= 4; $i++): ?>
+                                        <?php for ($i = 1; $i <= 4; $i++): ?>
                                             <div class='apsl-theme apsl-theme-<?php echo $i; ?>'>
                                                 <label><input type="radio" id="apsl-theme-<?php echo $i; ?>" value="<?php echo $i; ?>" class="apsl-theme apsl-png-theme" name="apsl_icon_theme" <?php checked($i, $options['apsl_icon_theme']); ?> >
                                                     <span><?php _e('Theme ' . $i, APSL_TEXT_DOMAIN); ?></span></label>
@@ -251,7 +248,7 @@
                                                     <img src="<?php echo APSL_IMAGE_DIR; ?>/preview-<?php echo $i; ?>.jpg" alt="theme preview">
                                                 </div>
                                             </div>
-<?php endfor; ?>
+                                        <?php endfor; ?>
                                     </div>
                                 </div>
                             </div>

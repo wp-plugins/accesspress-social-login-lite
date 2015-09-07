@@ -1,11 +1,9 @@
-<?php
-
-defined('ABSPATH') or die("No script kiddies please!");
+<?php defined('ABSPATH') or die("No script kiddies please!");
 /*
   Plugin name: AccessPress Social Login Lite
   Plugin URI: https://accesspressthemes.com/wordpress-plugins/accesspress-social-login-lite/
   Description: A plugin to add various social logins to a site.
-  version: 2.0.1
+  version: 2.0.2
   Author: AccessPress Themes
   Author URI: https://accesspressthemes.com/
   Text Domain: apsl-lite
@@ -15,7 +13,7 @@ defined('ABSPATH') or die("No script kiddies please!");
 
 //Declearation of the necessary constants for plugin
 if (!defined('APSL_VERSION')) {
-    define('APSL_VERSION', '2.0.1');
+    define('APSL_VERSION', '2.0.2');
 }
 
 if (!defined('APSL_IMAGE_DIR')) {
@@ -310,4 +308,4 @@ if (!class_exists('APSL_Lite_Class')) {
     //class termination
 }
 
-$apsl_object = new APSL_Lite_Class();          
+$apsl_object = new APSL_Lite_Class();
