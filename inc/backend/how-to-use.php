@@ -9,7 +9,7 @@
         <li>App ID: App id of the social media.</li>
         <li>App secret: App secret of the social media.</li>
     </ul>
-    To get the App ID and App Secret please follow the instructions(notes).
+    To get the App ID and App Secret please follow the instructions(notes section) for each social profile.
 
     <dt><strong>Other settings:</strong></dt>
     <dd>
@@ -18,7 +18,7 @@
             <li>Enable or disable the social login.</li>
             <li>Options to enable the social logins for login form, registration form and in comments.</li>
             <li>Options to choose the pre available themes, You can choose any one theme from the pre available 4 themes.</li>
-            <li>Login text: Here you can setup the login text as per your need.</li>
+            <li>Login text: Here you can setup the login text as per your needs.</li>
         </ul>
     </dd>
 
@@ -27,7 +27,7 @@
         <ul class="how-list">
             <li>Example 1: [apsl-login-lite login_text='Social Connection']</li>
             <li>Shortcode attributes: <br />
-                i. login_text: you can use the custom login text for the shortcodes using this attribute.<br />
+                i. login_text: You can use the custom login text for the shortcode using this attribute.<br />
             </li>
         </ul>
         </p></dd>

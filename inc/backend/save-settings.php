@@ -1,14 +1,14 @@
-<?php defined('ABSPATH') or die("No script kiddies please!"); ?>
+<?php defined( 'ABSPATH' ) or die( "No script kiddies please!" ); ?>
 <?php
 
 $apsl_settings = array();
 $apsl_settings['network_ordering'] = $_POST['network_ordering'];
 
 //for facebook settings
-foreach ($_POST['apsl_facebook_settings'] as $key => $value) {
+foreach ( $_POST['apsl_facebook_settings'] as $key => $value ) {
     $$key = $value;
 }
-$apsl_facebook_enable = isset($apsl_facebook_enable) ? $apsl_facebook_enable : '';
+$apsl_facebook_enable = isset( $apsl_facebook_enable ) ? $apsl_facebook_enable : '';
 
 $facebook_parameters = array(
     'apsl_facebook_enable' => $apsl_facebook_enable,
@@ -18,10 +18,10 @@ $facebook_parameters = array(
 $apsl_settings['apsl_facebook_settings'] = $facebook_parameters;
 
 //for twitter settings
-foreach ($_POST['apsl_twitter_settings'] as $key => $value) {
+foreach ( $_POST['apsl_twitter_settings'] as $key => $value ) {
     $$key = $value;
 }
-$apsl_twitter_enable = isset($apsl_twitter_enable) ? $apsl_twitter_enable : '';
+$apsl_twitter_enable = isset( $apsl_twitter_enable ) ? $apsl_twitter_enable : '';
 
 $twitter_parameters = array(
     'apsl_twitter_enable' => $apsl_twitter_enable,
@@ -32,10 +32,10 @@ $twitter_parameters = array(
 $apsl_settings['apsl_twitter_settings'] = $twitter_parameters;
 
 //for google settings
-foreach ($_POST['apsl_google_settings'] as $key => $value) {
+foreach ( $_POST['apsl_google_settings'] as $key => $value ) {
     $$key = $value;
 }
-$apsl_google_enable = isset($apsl_google_enable) ? $apsl_google_enable : '';
+$apsl_google_enable = isset( $apsl_google_enable ) ? $apsl_google_enable : '';
 
 $google_parameters = array(
     'apsl_google_enable' => $apsl_google_enable,
@@ -47,9 +47,9 @@ $apsl_settings['apsl_google_settings'] = $google_parameters;
 $apsl_settings['apsl_enable_disable_plugin'] = $_POST['apsl_enable_disable_plugin'];
 
 $display_options = array();
-if (isset($_POST['apsl_display_options'])) {
+if ( isset( $_POST['apsl_display_options'] ) ) {
 
-    foreach ($_POST['apsl_display_options'] as $key => $value) {
+    foreach ( $_POST['apsl_display_options'] as $key => $value ) {
         $display_options[] = $value;
     }
 }
@@ -70,7 +70,7 @@ $apsl_settings['apsl_user_avatar_options'] = $_POST['apsl_user_avatar_options'];
 $apsl_settings['apsl_send_email_notification_options'] = $_POST['apsl_send_email_notification_options'];
 
 //for saving the settings
-update_option(APSL_SETTINGS, $apsl_settings);
-$_SESSION['apsl_message'] = __('Settings Saved Successfully.', APSL_TEXT_DOMAIN);
-wp_redirect(admin_url() . 'admin.php?page=' . APSL_TEXT_DOMAIN);
+update_option( APSL_SETTINGS, $apsl_settings );
+$_SESSION['apsl_message'] = __( 'Settings Saved Successfully.', APSL_TEXT_DOMAIN );
+wp_redirect( admin_url() . 'admin.php?page=' . APSL_TEXT_DOMAIN );
 exit;

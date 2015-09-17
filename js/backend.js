@@ -1,7 +1,7 @@
 jQuery(document).ready(function($){
     //for sorting the social networks
     $('.network-settings').sortable({
-        containment: "parent",
+        containment: "parent"
     });
 
     //for the tabs
