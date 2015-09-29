@@ -17,7 +17,7 @@ $encoded_url = urlencode( $redirect_to );
     <div class='social-networks'>
         <?php foreach ( $options['network_ordering'] as $key => $value ): ?>
             <?php if ( $options["apsl_{$value}_settings"]["apsl_{$value}_enable"] === 'enable' ) { ?>
-                <a href="<?php wp_login_url() ?>?apsl_login_id=<?php echo $value; ?>_login<?php
+                <a href="<?php echo wp_login_url(); ?>?apsl_login_id=<?php echo $value; ?>_login<?php
                 if ( $encoded_url ) {
                     echo "&state=" . base64_encode( "redirect_to=$encoded_url" );
                 }
