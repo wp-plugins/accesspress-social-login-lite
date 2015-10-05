@@ -12,8 +12,8 @@ class APSL_Lite_Widget extends WP_Widget {
     function __construct() {
         parent::__construct(
                 'apsl_widget', // Base ID
-                __( 'AccessPress Social Login Lite', APSL_TEXT_DOMAIN ), // Name
-                array( 'description' => __( 'AccessPress Social Login Lite Widget', APSL_TEXT_DOMAIN ) ) // Args
+                __( 'AccessPress Social Login Lite', 'accesspress-social-login-lite' ), // Name
+                array( 'description' => __( 'AccessPress Social Login Lite Widget', 'accesspress-social-login-lite' ) ) // Args
         );
     }
 
@@ -39,12 +39,12 @@ class APSL_Lite_Widget extends WP_Widget {
         }
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title: ', APSL_TEXT_DOMAIN ); ?></label>
+            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title: ', 'accesspress-social-login-lite' ); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
         </p>
 
         <p>
-            <label for="<?php echo $this->get_field_id( 'login_text' ); ?>"><?php _e( 'Login Text: ', APSL_TEXT_DOMAIN ); ?></label>
+            <label for="<?php echo $this->get_field_id( 'login_text' ); ?>"><?php _e( 'Login Text: ', 'accesspress-social-login-lite' ); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id( 'login_text' ); ?>" name="<?php echo $this->get_field_name( 'login_text' ); ?>" type="text" value="<?php echo esc_attr( $login_text ); ?>">
         </p>
 

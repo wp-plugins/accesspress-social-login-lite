@@ -20,7 +20,7 @@ if ( !class_exists( 'APSL_Lite_Login_Check_Class' ) ) {
                 switch ( $exploder[0] ) {
                     case 'facebook':
                         if ( version_compare( PHP_VERSION, '5.4.0', '<' ) ) {
-                            echo _e( 'The Facebook SDK requires PHP version 5.4 or higher. Please notify about this error to site admin.', APSL_TEXT_DOMAIN );
+                            echo _e( 'The Facebook SDK requires PHP version 5.4 or higher. Please notify about this error to site admin.', 'accesspress-social-login-lite' );
                             die();
                         }
                         $this->onFacebookLogin();

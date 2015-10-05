@@ -71,6 +71,6 @@ $apsl_settings['apsl_send_email_notification_options'] = $_POST['apsl_send_email
 
 //for saving the settings
 update_option( APSL_SETTINGS, $apsl_settings );
-$_SESSION['apsl_message'] = __( 'Settings Saved Successfully.', APSL_TEXT_DOMAIN );
-wp_redirect( admin_url() . 'admin.php?page=' . APSL_TEXT_DOMAIN );
+$_SESSION['apsl_message'] = __( 'Settings Saved Successfully.', 'accesspress-social-login-lite' );
+wp_redirect( admin_url() . 'admin.php?page=' . 'accesspress-social-login-lite' );
 exit;

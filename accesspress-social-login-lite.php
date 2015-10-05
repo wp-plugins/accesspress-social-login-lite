@@ -3,17 +3,17 @@
   Plugin name: AccessPress Social Login Lite
   Plugin URI: https://accesspressthemes.com/wordpress-plugins/accesspress-social-login-lite/
   Description: A plugin to add various social logins to a site.
-  version: 2.0.4
+  version: 2.0.5
   Author: AccessPress Themes
   Author URI: https://accesspressthemes.com/
-  Text Domain: apsl-lite
+  Text Domain: accesspress-social-login-lite
   Domain Path: /languages/
   License: GPLv2 or later
  */
 
 //Declearation of the necessary constants for plugin
 if ( !defined( 'APSL_VERSION' ) ) {
-    define( 'APSL_VERSION', '2.0.4' );
+    define( 'APSL_VERSION', '2.0.5' );
 }
 
 if ( !defined( 'APSL_IMAGE_DIR' ) ) {
@@ -33,7 +33,7 @@ if ( !defined( 'APSL_LANG_DIR' ) ) {
 }
 
 if ( !defined( 'APSL_TEXT_DOMAIN' ) ) {
-    define( 'APSL_TEXT_DOMAIN', 'apsl-lite' );
+    define( 'APSL_TEXT_DOMAIN', 'accesspress-social-login-lite' );
 }
 
 if ( !defined( 'APSL_SETTINGS' ) ) {
@@ -192,12 +192,12 @@ if ( !class_exists( 'APSL_Lite_Class' ) ) {
 
         //loads the text domain for translation
         function plugin_text_domain() {
-            load_plugin_textdomain( APSL_TEXT_DOMAIN, false, APSL_LANG_DIR );
+            load_plugin_textdomain( 'accesspress-social-login-lite' , false, APSL_LANG_DIR );
         }
 
         //register the plugin menu for backend.
         function add_apsl_menu() {
-            add_menu_page( 'AccessPress Social Login Lite', 'AccessPress Social Login Lite', 'manage_options', APSL_TEXT_DOMAIN, array( $this, 'main_page' ), APSL_IMAGE_DIR . '/icon.png' );
+            add_menu_page( 'AccessPress Social Login Lite', 'AccessPress Social Login Lite', 'manage_options', 'accesspress-social-login-lite' , array( $this, 'main_page' ), APSL_IMAGE_DIR . '/icon.png' );
         }
 
         //menu page
@@ -208,7 +208,7 @@ if ( !class_exists( 'APSL_Lite_Class' ) ) {
         //registration of the backend assets
         function register_admin_assets() {
             wp_enqueue_style( 'fontawsome-css', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css', '', APSL_VERSION );
-            if ( isset( $_GET['page'] ) && $_GET['page'] == APSL_TEXT_DOMAIN ) {
+            if ( isset( $_GET['page'] ) && $_GET['page'] == 'accesspress-social-login-lite' ) {
                 //backend scripts
                 wp_enqueue_script( 'jquery-ui-sortable' );
                 wp_enqueue_script( 'apsl-admin-js', APSL_JS_DIR . '/backend.js', array( 'jquery', 'jquery-ui-sortable' ), APSL_VERSION ); //registering plugin's admin js
@@ -289,8 +289,8 @@ if ( !class_exists( 'APSL_Lite_Class' ) ) {
             if ( !empty( $_GET ) && wp_verify_nonce( $nonce, 'apsl-restore-default-settings-nonce' ) ) {
                 //restore the default plugin activation settings from the activation page.
                 include( 'inc/backend/activation.php' );
-                $_SESSION['apsl_message'] = __( 'Settings restored Successfully.', APSL_TEXT_DOMAIN );
-                wp_redirect( admin_url() . 'admin.php?page=' . APSL_TEXT_DOMAIN );
+                $_SESSION['apsl_message'] = __( 'Settings restored Successfully.', 'accesspress-social-login-lite' );
+                wp_redirect( admin_url() . 'admin.php?page=' . 'accesspress-social-login-lite' );
                 exit;
             } else {
                 die( 'No script kiddies please!' );

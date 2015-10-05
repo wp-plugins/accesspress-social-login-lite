@@ -43,7 +43,7 @@ if ( is_user_logged_in() ) {
             <span class='apsl-login-new-text'><?php echo $attr['login_text']; ?></span>
         <?php } ?>
         <?php if ( isset( $_REQUEST['error'] ) || isset( $_REQUEST['denied'] ) ) { ?>
-            <div class='apsl-error'><?php _e( 'You have Access Denied. Please authorize the app to login.', APSL_TEXT_DOMAIN ); ?></div>
+            <div class='apsl-error'><?php _e( 'You have Access Denied. Please authorize the app to login.', 'accesspress-social-login-lite' ); ?></div>
         <?php } ?>
         <div class='social-networks'>
             <?php foreach ( $options['network_ordering'] as $key => $value ): ?>
@@ -53,13 +53,13 @@ if ( is_user_logged_in() ) {
                         echo "&state=" . base64_encode( "redirect_to=$encoded_url" );
                     }
                     ?>" title='<?php
-                       _e( 'Login with', APSL_TEXT_DOMAIN );
+                       _e( 'Login with', 'accesspress-social-login-lite' );
                        echo ' ' . $value;
                        ?>'>
                         <div class="apsl-icon-block icon-<?php echo $value; ?>">
                             <i class="fa fa-<?php echo $value; ?>"></i>
-                            <span class="apsl-login-text"><?php _e( 'Login', APSL_TEXT_DOMAIN ); ?></span>
-                            <span class="apsl-long-login-text"><?php _e( 'Login with', APSL_TEXT_DOMAIN ); ?><?php echo ' ' . $value; ?></span>
+                            <span class="apsl-login-text"><?php _e( 'Login', 'accesspress-social-login-lite' ); ?></span>
+                            <span class="apsl-long-login-text"><?php _e( 'Login with', 'accesspress-social-login-lite' ); ?><?php echo ' ' . $value; ?></span>
                         </div>
                     </a>
                 <?php } ?>
