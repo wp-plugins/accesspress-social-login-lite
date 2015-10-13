@@ -37,17 +37,19 @@
         <div class="clear"></div>
 
         <?php
-        $options = get_option( APSL_SETTINGS );
-        //$this->print_array($options);
-        ?>
+$options = get_option( APSL_SETTINGS );
+//$this->print_array($options);
 
-        <?php if ( isset( $_SESSION['apsl_message'] ) ) { ?>
+?>
+
+        <?php if( isset( $_SESSION['apsl_message'] ) ) { ?>
             <div class="apsl-message">
                 <p> <?php echo $_SESSION['apsl_message'];
-                    unset( $_SESSION['apsl_message'] ); ?>
+    unset( $_SESSION['apsl_message'] ); ?>
                 </p>
             </div>
-<?php } ?>
+<?php
+} ?>
         <div class='apsl-networks'>
             <div class='apsl-network-options'>
                 <form method="post" action="<?php echo admin_url() . 'admin-post.php' ?>">
@@ -65,11 +67,11 @@
                         <div class='apsl-tab-contents' id='tab-apsl-networks-settings'>
 
                             <div class='network-settings'>
-                                <?php foreach ( $options['network_ordering'] as $key => $value ): ?>
+                                <?php foreach( $options['network_ordering'] as $key => $value ): ?>
                                     <?php
-                                    switch ( $value ) {
-                                        case 'facebook':
-                                            ?>
+    switch( $value ) {
+        case 'facebook':
+?>
                                             <div class='apsl-settings apsl-facebook-settings'>
                                                 <!-- Facebook Settings -->
                                                 <div class='apsl-label'><?php _e( "Facebook", 'accesspress-social-login-lite' ); ?><span class='apsl_show_hide' id='apsl_show_hide_<?php echo $value; ?>'><i class="fa fa-caret-down"></i></span> </div>
@@ -81,17 +83,17 @@
                                                     </div>
                                                     <div class='apsl-app-id-wrapper'>
                                                         <label><?php _e( 'App ID:', 'accesspress-social-login-lite' ); ?></label><input type='text' id='apsl-facebook-app-id' name='apsl_facebook_settings[apsl_facebook_app_id]' value='<?php
-                                                                                                           if ( isset( $options['apsl_facebook_settings']['apsl_facebook_app_id'] ) ) {
-                                                                                                               echo $options['apsl_facebook_settings']['apsl_facebook_app_id'];
-                                                                                                           }
-                                                                                                           ?>' />
+            if( isset( $options['apsl_facebook_settings']['apsl_facebook_app_id'] ) ) {
+                echo $options['apsl_facebook_settings']['apsl_facebook_app_id'];
+            }
+?>' />
                                                     </div>
                                                     <div class='apsl-app-secret-wrapper'>
                                                         <label><?php _e( 'App Secret:', 'accesspress-social-login-lite' ); ?></label><input type='text' id='apsl-facebook-app-secret' name='apsl_facebook_settings[apsl_facebook_app_secret]' value='<?php
-                                                                                                           if ( isset( $options['apsl_facebook_settings']['apsl_facebook_app_secret'] ) ) {
-                                                                                                               echo $options['apsl_facebook_settings']['apsl_facebook_app_secret'];
-                                                                                                           }
-                                                                                                           ?>' />
+            if( isset( $options['apsl_facebook_settings']['apsl_facebook_app_secret'] ) ) {
+                echo $options['apsl_facebook_settings']['apsl_facebook_app_secret'];
+            }
+?>' />
                                                     </div>
                                                     <div class='apsl-info'>
                                                         <span class='apsl-info-note'><?php _e( 'Note:', 'accesspress-social-login-lite' ); ?></span> <br />
@@ -111,9 +113,11 @@
                                                     </div>
                                                 </div>
                                             </div>
-            <?php break; ?>
+            <?php
+        break; ?>
 
-        <?php case 'twitter': ?>
+        <?php
+        case 'twitter': ?>
                                             <div class='apsl-settings apsl-twitter-settings'>
                                                 <!-- Twitter Settings -->
                                                 <div class='apsl-label'><?php _e( "Twitter", 'accesspress-social-login-lite' ); ?> <span class='apsl_show_hide' id='apsl_show_hide_<?php echo $value; ?>'><i class="fa fa-caret-down"></i></span> </div>
@@ -125,18 +129,18 @@
 
                                                     <div class='apsl-app-id-wrapper'>
                                                         <label><?php _e( 'Consumer Key (API Key):', 'accesspress-social-login-lite' ); ?></label><input type='text' id='apsl-twitter-app-id' name='apsl_twitter_settings[apsl_twitter_api_key]' value='<?php
-                                                        if ( isset( $options['apsl_twitter_settings']['apsl_twitter_api_key'] ) ) {
-                                                            echo $options['apsl_twitter_settings']['apsl_twitter_api_key'];
-                                                        }
-                                                        ?>' />
+            if( isset( $options['apsl_twitter_settings']['apsl_twitter_api_key'] ) ) {
+                echo $options['apsl_twitter_settings']['apsl_twitter_api_key'];
+            }
+?>' />
                                                     </div>
 
                                                     <div class='apsl-app-secret-wrapper'>
                                                         <label><?php _e( 'Consumer Secret (API Secret):', 'accesspress-social-login-lite' ); ?></label><input type='text' id='apsl-twitter-app-secret' name='apsl_twitter_settings[apsl_twitter_api_secret]' value='<?php
-                                                        if ( isset( $options['apsl_twitter_settings']['apsl_twitter_api_secret'] ) ) {
-                                                            echo $options['apsl_twitter_settings']['apsl_twitter_api_secret'];
-                                                        }
-                                                        ?>' />
+            if( isset( $options['apsl_twitter_settings']['apsl_twitter_api_secret'] ) ) {
+                echo $options['apsl_twitter_settings']['apsl_twitter_api_secret'];
+            }
+?>' />
                                                     </div>
 
                                                     <input type='hidden' name='network_ordering[]' value='twitter' />
@@ -153,13 +157,12 @@
                                                         </ul>
 
                                                     </div>
-                                                </div>	
+                                                </div>  
                                             </div>
             <?php
-            break;
-
+        break;
         case 'google':
-            ?>
+?>
                                             <div class='apsl-settings apsl-google-settings'>
                                                 <!-- Google Settings -->
                                                 <div class='apsl-label'><?php _e( "Google", 'accesspress-social-login-lite' ); ?> <span class='apsl_show_hide' id='apsl_show_hide_<?php echo $value; ?>'><i class="fa fa-caret-down"></i></span> </div>
@@ -170,17 +173,17 @@
                                                     </div>
                                                     <div class='apsl-app-id-wrapper'>
                                                         <label><?php _e( 'Client ID:', 'accesspress-social-login-lite' ); ?></label><input type='text' id='apsl-google-client-id' name='apsl_google_settings[apsl_google_client_id]' value='<?php
-                                                                                                                  if ( isset( $options['apsl_google_settings']['apsl_google_client_id'] ) ) {
-                                                                                                                      echo $options['apsl_google_settings']['apsl_google_client_id'];
-                                                                                                                  }
-                                                                                                                  ?>' />
+            if( isset( $options['apsl_google_settings']['apsl_google_client_id'] ) ) {
+                echo $options['apsl_google_settings']['apsl_google_client_id'];
+            }
+?>' />
                                                     </div>
                                                     <div class='apsl-app-secret-wrapper'>
                                                         <label><?php _e( 'Client Secret:', 'accesspress-social-login-lite' ); ?></label><input type='text' id='apsl-google-client-secret' name='apsl_google_settings[apsl_google_client_secret]' value='<?php
-                                                                                                                  if ( isset( $options['apsl_google_settings']['apsl_google_client_secret'] ) ) {
-                                                                                                                      echo $options['apsl_google_settings']['apsl_google_client_secret'];
-                                                                                                                  }
-                                                                                                                  ?>' />
+            if( isset( $options['apsl_google_settings']['apsl_google_client_secret'] ) ) {
+                echo $options['apsl_google_settings']['apsl_google_client_secret'];
+            }
+?>' />
                                                     </div>
                                                     <input type='hidden' name='network_ordering[]' value='google' />
                                                     <div class='apsl-info'>
@@ -205,18 +208,20 @@
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                </div>	
+                                                </div>  
                                             </div>
-            <?php break; ?>
+            <?php
+        break; ?>
 
         <?php
         default:
             echo "should not reach here";
-            break;
+        break;
     }
-    ?>
-<?php endforeach; ?>
-                            </div>	
+?>
+<?php
+endforeach; ?>
+                            </div>  
                         </div>
 
                         <div class='apsl-tab-contents' id='tab-apsl-theme-settings' style="display:none">
@@ -240,19 +245,19 @@
                                     <div class='apsl_network_settings_wrapper' style='display:none'>
                                         <p><?php _e( 'Please choose the options where you want to display the social login form.', 'accesspress-social-login-lite' ); ?></p>
                                         <p><input type="checkbox" id="apsl_login_form" value="login_form" name="apsl_display_options[]" <?php
-                                            if ( in_array( "login_form", $options['apsl_display_options'] ) ) {
-                                                echo "checked='checked'";
-                                            }
+if( in_array( "login_form", $options['apsl_display_options'] ) ) {
+    echo "checked='checked'";
+}
 ?> ><label for="apsl_login_form"><?php _e( 'Login Form', 'accesspress-social-login-lite' ); ?> </label></p>
                                         <p><input type="checkbox" id="apsl_register_form" value="register_form" name="apsl_display_options[]" <?php
-                                            if ( in_array( "register_form", $options['apsl_display_options'] ) ) {
-                                                echo "checked='checked'";
-                                            }
+if( in_array( "register_form", $options['apsl_display_options'] ) ) {
+    echo "checked='checked'";
+}
 ?> ><label for="apsl_register_form"><?php _e( 'Register Form', 'accesspress-social-login-lite' ); ?> </label></p>
                                         <p><input type="checkbox" id="apsl_comment_form" value="comment_form" name="apsl_display_options[]" <?php
-                                            if ( in_array( "comment_form", $options['apsl_display_options'] ) ) {
-                                                echo "checked='checked'";
-                                            }
+if( in_array( "comment_form", $options['apsl_display_options'] ) ) {
+    echo "checked='checked'";
+}
 ?> ><label for="apsl_comment_form"><?php _e( 'Comments', 'accesspress-social-login-lite' ); ?> </label></p>
                                     </div>
                                 </div>
@@ -262,7 +267,7 @@
                                 <div class='apsl-themes-wrapper'>
                                     <div class="apsl-label"><?php _e( 'Available icon themes', 'accesspress-social-login-lite' ); ?> <span class='apsl_show_hide'><i class="fa fa-caret-down"></i></span> </div>
                                     <div class='apsl_network_settings_wrapper' style='display:none'>
-<?php for ( $i = 1; $i <= 4; $i++ ): ?>
+<?php for( $i = 1;$i <= 4;$i++ ): ?>
                                             <div class='apsl-theme apsl-theme-<?php echo $i; ?>'>
                                                 <label><input type="radio" id="apsl-theme-<?php echo $i; ?>" value="<?php echo $i; ?>" class="apsl-theme apsl-png-theme" name="apsl_icon_theme" <?php checked( $i, $options['apsl_icon_theme'] ); ?> >
                                                     <span><?php _e( 'Theme ' . $i, 'accesspress-social-login-lite' ); ?></span></label>
@@ -270,7 +275,8 @@
                                                     <img src="<?php echo APSL_IMAGE_DIR; ?>/preview-<?php echo $i; ?>.jpg" alt="theme preview">
                                                 </div>
                                             </div>
-<?php endfor; ?>
+<?php
+endfor; ?>
                                     </div>
                                 </div>
                             </div>
@@ -281,12 +287,12 @@
                                     <div class='apsl_network_settings_wrapper' style='display:none'>
                                         <p class='apsl-title-text-field'>
                                             <span><?php _e( 'Login text:', 'accesspress-social-login-lite' ); ?></span> <input type='text' name='apsl_title_text_field' id='apsl-title-text' value='<?php
-                                               if ( isset( $options['apsl_title_text_field'] ) && $options['apsl_title_text_field'] != '' ) {
-                                                   echo $options['apsl_title_text_field'];
-                                               }
-                                               ?>' />
+if( isset( $options['apsl_title_text_field'] ) && $options['apsl_title_text_field'] != '' ) {
+    echo $options['apsl_title_text_field'];
+}
+?>' />
                                         </p>
-                                    </div>	
+                                    </div>  
                                 </div>
                             </div>
 
@@ -295,34 +301,37 @@
                                     <div class="apsl-label"><?php _e( 'Logout redirect link', 'accesspress-social-login-lite' ); ?> <span class='apsl_show_hide'><i class="fa fa-caret-down"></i></span> </div>
                                     <div class='apsl_network_settings_wrapper' style='display:none'>
                                         <input type='radio' id='apsl_custom_logout_redirect_home' class='apsl_custom_logout_redirect_options' name='apsl_custom_logout_redirect_options' value='home' <?php
-                                               if ( isset( $options['apsl_custom_logout_redirect_options'] ) ) {
-                                                   checked( $options['apsl_custom_logout_redirect_options'], 'home', 'true' );
-                                               }
-                                               ?> /> <label for='apsl_custom_logout_redirect_home'><?php _e( 'Home page', 'accesspress-social-login-lite' ); ?></label><br /><br />
+if( isset( $options['apsl_custom_logout_redirect_options'] ) ) {
+    checked( $options['apsl_custom_logout_redirect_options'], 'home', 'true' );
+}
+?> /> <label for='apsl_custom_logout_redirect_home'><?php _e( 'Home page', 'accesspress-social-login-lite' ); ?></label><br /><br />
                                         <input type='radio' id='apsl_custom_logout_redirect_current' class='apsl_custom_logout_redirect_options' name='apsl_custom_logout_redirect_options' value='current_page' <?php
-                                               if ( isset( $options['apsl_custom_logout_redirect_options'] ) ) {
-                                                   checked( $options['apsl_custom_logout_redirect_options'], 'current_page', 'true' );
-                                               }
-                                               ?> /> <label for='apsl_custom_logout_redirect_current'><?php _e( 'Current page', 'accesspress-social-login-lite' ); ?></label><br /><br />
+if( isset( $options['apsl_custom_logout_redirect_options'] ) ) {
+    checked( $options['apsl_custom_logout_redirect_options'], 'current_page', 'true' );
+}
+?> /> <label for='apsl_custom_logout_redirect_current'><?php _e( 'Current page', 'accesspress-social-login-lite' ); ?></label><br /><br />
 
 
                                         <input type='radio' id='apsl_custom_logout_redirect_custom' class='apsl_custom_logout_redirect_options' name='apsl_custom_logout_redirect_options' value='custom_page' <?php
-                                               if ( isset( $options['apsl_custom_logout_redirect_options'] ) ) {
-                                                   checked( $options['apsl_custom_logout_redirect_options'], 'custom_page', 'true' );
-                                               }
-                                               ?> /> <label for='apsl_custom_logout_redirect_custom'><?php _e( 'Custom page', 'accesspress-social-login-lite' ); ?></label><br />
+if( isset( $options['apsl_custom_logout_redirect_options'] ) ) {
+    checked( $options['apsl_custom_logout_redirect_options'], 'custom_page', 'true' );
+}
+?> /> <label for='apsl_custom_logout_redirect_custom'><?php _e( 'Custom page', 'accesspress-social-login-lite' ); ?></label><br />
 
-                                        <div class='apsl-custom-logout-redirect-link' <?php if ( isset( $options['apsl_custom_logout_redirect_options'] ) ) {
-                                                   if ( $options['apsl_custom_logout_redirect_options'] == 'custom_page' ) {
-                                                       ?> style='display: block' <?php } else { ?> style='display:none' <?php }
-                                               }
-                                               ?>>
+                                        <div class='apsl-custom-logout-redirect-link' <?php if( isset( $options['apsl_custom_logout_redirect_options'] ) ) {
+    if( $options['apsl_custom_logout_redirect_options'] == 'custom_page' ) {
+?> style='display: block' <?php
+    } 
+    else { ?> style='display:none' <?php
+    }
+}
+?>>
                                             <p class='apsl-title-text-field'>
                                                 <span><?php _e( 'Logout redirect page:', 'accesspress-social-login-lite' ); ?></span> <input type='text' name='apsl_custom_logout_redirect_link' id='apsl-custom-logout-redirect-link' value='<?php
-                                               if ( isset( $options['apsl_custom_logout_redirect_link'] ) && $options['apsl_custom_logout_redirect_link'] != '' ) {
-                                                   echo $options['apsl_custom_logout_redirect_link'];
-                                               }
-                                               ?>' />
+if( isset( $options['apsl_custom_logout_redirect_link'] ) && $options['apsl_custom_logout_redirect_link'] != '' ) {
+    echo $options['apsl_custom_logout_redirect_link'];
+}
+?>' />
                                             </p>
                                             <div class='apsl-info'>
                                                 <span class='apsl-info-note'><?php _e( 'Note:', 'accesspress-social-login-lite' ); ?></span> <br />
@@ -334,19 +343,20 @@
                             </div>
 
                             <div class='apsl-settings'>
-                                <div class='apsl-login-redirect-settings'>
+                                <div class='apsl-login-redir
+                                ect-settings'>
                                     <div class="apsl-label"><?php _e( 'Login redirect link', 'accesspress-social-login-lite' ); ?> <span class='apsl_show_hide'><i class="fa fa-caret-down"></i></span> </div>
                                     <div class='apsl_network_settings_wrapper' style='display:none'>
                                         <input type='radio' id='apsl_custom_login_redirect_home' class='apsl_custom_login_redirect_options' name='apsl_custom_login_redirect_options' value='home' <?php
-                                                if ( isset( $options['apsl_custom_login_redirect_options'] ) ) {
-                                                    checked( $options['apsl_custom_login_redirect_options'], 'home', 'true' );
-                                                }
-                                               ?> /> <label for='apsl_custom_login_redirect_home'><?php _e( 'Home page', 'accesspress-social-login-lite' ); ?></label><br /><br />
+if( isset( $options['apsl_custom_login_redirect_options'] ) ) {
+    checked( $options['apsl_custom_login_redirect_options'], 'home', 'true' );
+}
+?> /> <label for='apsl_custom_login_redirect_home'><?php _e( 'Home page', 'accesspress-social-login-lite' ); ?></label><br /><br />
                                         <input type='radio' id='apsl_custom_login_redirect_current' class='apsl_custom_login_redirect_options' name='apsl_custom_login_redirect_options' value='current_page' <?php
-                                               if ( isset( $options['apsl_custom_login_redirect_options'] ) ) {
-                                                   checked( $options['apsl_custom_login_redirect_options'], 'current_page', 'true' );
-                                               }
-                                               ?> /> <label for='apsl_custom_login_redirect_current'><?php _e( 'Current page', 'accesspress-social-login-lite' ); ?></label><br /><br />
+if( isset( $options['apsl_custom_login_redirect_options'] ) ) {
+    checked( $options['apsl_custom_login_redirect_options'], 'current_page', 'true' );
+}
+?> /> <label for='apsl_custom_login_redirect_current'><?php _e( 'Current page', 'accesspress-social-login-lite' ); ?></label><br /><br />
                                         <div class='apsl-custom-login-redirect-link1' >
                                             <div class='apsl-info'>
                                                 <span class='apsl-info-note'><?php _e( 'Note:', 'accesspress-social-login-lite' ); ?></span> <br />
@@ -354,22 +364,25 @@
                                             </div>
                                         </div>
                                         <input type='radio' id='apsl_custom_login_redirect_custom' class='apsl_custom_login_redirect_options' name='apsl_custom_login_redirect_options' value='custom_page' <?php
-                                               if ( isset( $options['apsl_custom_login_redirect_options'] ) ) {
-                                                   checked( $options['apsl_custom_login_redirect_options'], 'custom_page', 'true' );
-                                               }
-                                               ?> /> <label for='apsl_custom_login_redirect_custom'><?php _e( 'Custom page', 'accesspress-social-login-lite' ); ?></label><br />
+if( isset( $options['apsl_custom_login_redirect_options'] ) ) {
+    checked( $options['apsl_custom_login_redirect_options'], 'custom_page', 'true' );
+}
+?> /> <label for='apsl_custom_login_redirect_custom'><?php _e( 'Custom page', 'accesspress-social-login-lite' ); ?></label><br />
 
-                                        <div class='apsl-custom-login-redirect-link' <?php if ( isset( $options['apsl_custom_login_redirect_options'] ) ) {
-                                                   if ( $options['apsl_custom_login_redirect_options'] == 'custom_page' ) {
-                                                       ?> style='display: block' <?php } else { ?> style='display:none' <?php }
-                                       }
-                                               ?>>
+                                        <div class='apsl-custom-login-redirect-link' <?php if( isset( $options['apsl_custom_login_redirect_options'] ) ) {
+    if( $options['apsl_custom_login_redirect_options'] == 'custom_page' ) {
+?> style='display: block' <?php
+    } 
+    else { ?> style='display:none' <?php
+    }
+}
+?>>
                                             <p class='apsl-title-text-field'>
                                                 <span><?php _e( 'Login redirect page:', 'accesspress-social-login-lite' ); ?></span> <input type='text' name='apsl_custom_login_redirect_link' id='apsl-custom-login-redirect-link' value='<?php
-                                       if ( isset( $options['apsl_custom_login_redirect_link'] ) && $options['apsl_custom_login_redirect_link'] != '' ) {
-                                           echo $options['apsl_custom_login_redirect_link'];
-                                       }
-                                               ?>' />
+if( isset( $options['apsl_custom_login_redirect_link'] ) && $options['apsl_custom_login_redirect_link'] != '' ) {
+    echo $options['apsl_custom_login_redirect_link'];
+}
+?>' />
                                             </p>
                                             <div class='apsl-info'>
                                                 <span class='apsl-info-note'><?php _e( 'Note:', 'accesspress-social-login-lite' ); ?></span> <br />
@@ -385,15 +398,15 @@
                                     <div class="apsl-label"><?php _e( 'User avatar', 'accesspress-social-login-lite' ); ?> <span class='apsl_show_hide'><i class="fa fa-caret-down"></i></span> </div>
                                     <div class='apsl_network_settings_wrapper apsl_network_settings_outer' style='display:none'>
                                         <input type='radio' id='apsl_user_avatar_default' class='apsl_user_avatar_options' name='apsl_user_avatar_options' value='default' <?php
-                                       if ( isset( $options['apsl_user_avatar_options'] ) ) {
-                                           checked( $options['apsl_user_avatar_options'], 'default', 'true' );
-                                       }
-                                               ?> /> <label for='apsl_user_avatar_default'><?php _e( 'Use wordpress provided default avatar.', 'accesspress-social-login-lite' ); ?></label><br /><br />
+if( isset( $options['apsl_user_avatar_options'] ) ) {
+    checked( $options['apsl_user_avatar_options'], 'default', 'true' );
+}
+?> /> <label for='apsl_user_avatar_default'><?php _e( 'Use wordpress provided default avatar.', 'accesspress-social-login-lite' ); ?></label><br /><br />
                                         <input type='radio' id='apsl_user_avatar_social' class='apsl_user_avatar_options' name='apsl_user_avatar_options' value='social' <?php
-                            if ( isset( $options['apsl_user_avatar_options'] ) ) {
-                                checked( $options['apsl_user_avatar_options'], 'social', 'true' );
-                            }
-                                               ?> /> <label for='apsl_user_avatar_social'><?php _e( 'Use the profile picture from social media where available.', 'accesspress-social-login-lite' ); ?></label><br /><br />
+if( isset( $options['apsl_user_avatar_options'] ) ) {
+    checked( $options['apsl_user_avatar_options'], 'social', 'true' );
+}
+?> /> <label for='apsl_user_avatar_social'><?php _e( 'Use the profile picture from social media where available.', 'accesspress-social-login-lite' ); ?></label><br /><br />
                                         <div class='apsl-info'>
                                             <span class='apsl-info-note'><?php _e( 'Note:', 'accesspress-social-login-lite' ); ?></span> <br />
                                             <span class='apsl-info-content'>Please choose the options from where you want your users avatar to be loaded from. If you choose default wordpress avatar it will use the gravatar profile image if user have gravatar profile assocated with their registered email address.</span>
@@ -407,15 +420,15 @@
                                     <div class="apsl-label"><?php _e( 'Email notification settings', 'accesspress-social-login-lite' ); ?> <span class='apsl_show_hide'><i class="fa fa-caret-down"></i></span> </div>
                                     <div class='apsl_network_settings_wrapper apsl_network_settings_outer' style='display:none'>
                                         <input type='radio' id='apsl_send_email_notification_yes' class='apsl_send_email_notification_yes' name='apsl_send_email_notification_options' value='yes' <?php
-                            if ( isset( $options['apsl_send_email_notification_options'] ) ) {
-                                checked( $options['apsl_send_email_notification_options'], 'yes', 'true' );
-                            }
-                                               ?> /> <label for='apsl_send_email_notification_yes'><?php _e( 'Send email notification to both user and site admin.', 'accesspress-social-login-lite' ); ?></label><br /><br />
+if( isset( $options['apsl_send_email_notification_options'] ) ) {
+    checked( $options['apsl_send_email_notification_options'], 'yes', 'true' );
+}
+?> /> <label for='apsl_send_email_notification_yes'><?php _e( 'Send email notification to both user and site admin.', 'accesspress-social-login-lite' ); ?></label><br /><br />
                                         <input type='radio' id='apsl_send_email_notification_no' class='apsl_send_email_notification_no' name='apsl_send_email_notification_options' value='no' <?php
-                            if ( isset( $options['apsl_send_email_notification_options'] ) ) {
-                                checked( $options['apsl_send_email_notification_options'], 'no', 'true' );
-                            }
-                                               ?> /> <label for='apsl_send_email_notification_no'><?php _e( 'Do not send email notification to both user and site admin.', 'accesspress-social-login-lite' ); ?></label><br /><br />
+if( isset( $options['apsl_send_email_notification_options'] ) ) {
+    checked( $options['apsl_send_email_notification_options'], 'no', 'true' );
+}
+?> /> <label for='apsl_send_email_notification_no'><?php _e( 'Do not send email notification to both user and site admin.', 'accesspress-social-login-lite' ); ?></label><br /><br />
                                         <div class='apsl-info'>
                                             <span class='apsl-info-note'><?php _e( 'Note:', 'accesspress-social-login-lite' ); ?></span> <br />
                                             <span class='apsl-info-content'>Here you can configure an options to send email notifications about user registration to site admin and user.</span>
@@ -429,12 +442,12 @@
 
                         <!-- how to use section -->
                         <div class='apsl-tab-contents' id='tab-apsl-how-to-use' style="display:none">
-<?php include(APSL_PLUGIN_DIR . 'inc/backend/how-to-use.php'); ?>
+<?php include( APSL_PLUGIN_DIR . 'inc/backend/how-to-use.php' ); ?>
                         </div>
 
                         <!-- about section -->
                         <div class='apsl-tab-contents' id='tab-apsl-about' style="display:none">
-<?php include(APSL_PLUGIN_DIR . 'inc/backend/about.php'); ?>
+<?php include( APSL_PLUGIN_DIR . 'inc/backend/about.php' ); ?>
                         </div>
 
                         <!-- Save settings Button -->

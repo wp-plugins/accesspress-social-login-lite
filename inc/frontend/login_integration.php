@@ -1,5 +1,6 @@
-<?php defined( 'ABSPATH' ) or die( "No script kiddies please!" ); ?>
-<?php
+<?php 
+
+defined( 'ABSPATH' ) or die( "No script kiddies please!" );
 $options = get_option( APSL_SETTINGS );
 
 $redirect_to = isset( $_REQUEST['redirect_to'] ) ? $_REQUEST['redirect_to'] : '';

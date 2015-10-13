@@ -4,14 +4,14 @@ Tags: social,  login, social login, facebook, twitter, google, social connect, s
 Donate link: http://accesspressthemes.com/donation/
 Requires at least: 3.8
 Tested up to: 4.3
-Stable tag: 2.0.5
+Stable tag: 2.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 No WordPress account and user credentials to remember, login using any of the most popular 3 social media accounts!
 
 == Description ==
-AccessPress <strong>Social Login<strong> lite - is a perfect <strong>Free WordPress plugin</strong> to allow your website users to register/login to the website using one of their favorite social website accounts. 
+AccessPress <strong>Social Login<strong> lite - is a perfect <strong>Free WordPress plugin</strong> to allow your website users to register/login to the website using one of their favorite social website accounts.
 
 As a website owner you can easily configure which social accounts to enable/disable for login, which areas of the website social login should be displayed (login, registration, comments). Also you can select the social login buttons/icons from 4 beautifully designed templates to fit them with your website's overall design/theme. Your website will fetch real data of the user's social profile!
 
@@ -77,7 +77,7 @@ For more features upgrade to PRO version
 
 	★ Works with Buddypress.
 
-	★ High level of customization/configuration - admin can change the title 
+	★ High level of customization/configuration - admin can change the title
 	attributes for social media icons, other texts, strings etc.
 
 = Premium upgrade =
@@ -131,6 +131,9 @@ Yes. You can use the AccessPress social login lite anywhere by using shortcode i
 4. Backend Other settings Section.
 
 == Changelog ==
+= 2.0.6 =
+* Code optimization. Removal of unnecessary php opening and closing tags.
+
 = 2.0.5 =
 * Text domain changed to match the plugin folder name.
 * Done the backend css modifications.
