@@ -4,7 +4,7 @@ Tags: social,  login, social login, facebook, twitter, google, social connect, s
 Donate link: http://accesspressthemes.com/donation/
 Requires at least: 3.8
 Tested up to: 4.3
-Stable tag: 2.0.6
+Stable tag: 2.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -131,6 +131,12 @@ Yes. You can use the AccessPress social login lite anywhere by using shortcode i
 4. Backend Other settings Section.
 
 == Changelog ==
+= 2.0.8 =
+* Done the bug fixing for the email notifications for the admin with the blank user details when user deny the app for login.
+
+= 2.0.7 =
+* Addition of the header_sent method checking in the plugin's main class for the session start.
+
 = 2.0.6 =
 * Code optimization. Removal of unnecessary php opening and closing tags.
 

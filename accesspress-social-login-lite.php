@@ -3,7 +3,7 @@
   Plugin name: AccessPress Social Login Lite
   Plugin URI: https://accesspressthemes.com/wordpress-plugins/accesspress-social-login-lite/
   Description: A plugin to add various social logins to a site.
-  version: 2.0.6
+  version: 2.0.8
   Author: AccessPress Themes
   Author URI: https://accesspressthemes.com/
   Text Domain: accesspress-social-login-lite
@@ -12,7 +12,7 @@
 */
 //Declearation of the necessary constants for plugin
 if( !defined( 'APSL_VERSION' ) ) {
-    define( 'APSL_VERSION', '2.0.6' );
+    define( 'APSL_VERSION', '2.0.8' );
 }
 
 if( !defined( 'APSL_IMAGE_DIR' ) ) {
@@ -54,6 +54,8 @@ if( !function_exists( 'wp_new_user_notification' ) ) {
         $user = new WP_User( $user_id );
         
         $user_login = stripslashes( $user->user_login );
+        if ( empty ( $user_login ) )
+        return;
         $user_email = stripslashes( $user->user_email );
         
         $message = sprintf( __( 'New user registration on your site %s:' ), get_option( 'blogname' ) ) . "\r\n\r\n";
@@ -167,7 +169,7 @@ if( !class_exists( 'APSL_Lite_Class' ) ) {
         }
         //starts the session with the call of init hook
         function session_init() {
-            if( !session_id() ) {
+            if( !session_id() && !headers_sent() ) {
                 session_start();
             }
         }
