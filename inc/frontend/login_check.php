@@ -124,7 +124,7 @@ if( !class_exists( 'APSL_Lite_Login_Check_Class' ) ) {
                         $fb->setDefaultAccessToken( $accessToken );
                         
                         try {
-                            $response = $fb->get( '/me?fields=email,name, first_name, last_name, gender, link, about, address, bio, birthday, education, hometown, is_verified, languages, location, website' );
+                            $response = $fb->get( '/me?fields=email,name, first_name, last_name, gender, link, about, bio, birthday, education, hometown, is_verified, languages, location, website' );
                             $userNode = $response->getGraphUser();
                         }
                         catch( Facebook\Exceptions\FacebookResponseException $e ) {
