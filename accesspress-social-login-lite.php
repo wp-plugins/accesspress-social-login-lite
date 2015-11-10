@@ -3,7 +3,7 @@
   Plugin name: AccessPress Social Login Lite
   Plugin URI: https://accesspressthemes.com/wordpress-plugins/accesspress-social-login-lite/
   Description: A plugin to add various social logins to a site.
-  version: 2.0.9
+  version: 3.0.0
   Author: AccessPress Themes
   Author URI: https://accesspressthemes.com/
   Text Domain: accesspress-social-login-lite
@@ -12,7 +12,7 @@
 */
 //Declearation of the necessary constants for plugin
 if( !defined( 'APSL_VERSION' ) ) {
-    define( 'APSL_VERSION', '2.0.9' );
+    define( 'APSL_VERSION', '3.0.0' );
 }
 
 if( !defined( 'APSL_IMAGE_DIR' ) ) {
@@ -48,37 +48,54 @@ if( !defined( 'APSL_PLUGIN_DIR' ) ) {
  */
 include_once( 'inc/backend/widget.php' );
 // Redefine user notification function
-if( !function_exists( 'wp_new_user_notification' ) ) {
-    
-    function wp_new_user_notification( $user_id, $plaintext_pass = '' ) {
-        $user = new WP_User( $user_id );
-        
-        $user_login = stripslashes( $user->user_login );
-        if ( empty ( $user_login ) )
+// Redefine user notification function
+if ( !function_exists('wp_new_user_notification') ) {
+
+    function wp_new_user_notification( $user_id, $deprecated = null, $notify = 'both' ) {
+    if ( $deprecated !== null ) {
+        _deprecated_argument( __FUNCTION__, '4.3.1' );
+    }
+
+    global $wpdb, $wp_hasher;
+    $user = get_userdata( $user_id );
+
+    // The blogname option is escaped with esc_html on the way into the database in sanitize_option
+    // we want to reverse this for the plain text arena of emails.
+    $blogname = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
+
+    $message  = sprintf(__('New user registration on your site %s:'), $blogname) . "\r\n\r\n";
+    $message .= sprintf(__('Username: %s'), $user->user_login) . "\r\n\r\n";
+    $message .= sprintf(__('E-mail: %s'), $user->user_email) . "\r\n";
+
+    @wp_mail(get_option('admin_email'), sprintf(__('[%s] New User Registration'), $blogname), $message);
+
+    if ( 'admin' === $notify || empty( $notify ) ) {
         return;
-        $user_email = stripslashes( $user->user_email );
-        
-        $message = sprintf( __( 'New user registration on your site %s:' ), get_option( 'blogname' ) ) . "\r\n\r\n";
-        $message.= sprintf( __( 'Username: %s' ), $user_login ) . "\r\n\r\n";
-        $message.= sprintf( __( 'E-mail: %s' ), $user_email ) . "\r\n";
-        $message.= __( 'Thanks!' );
-        
-        $headers = 'From:' . get_option( 'blogname' ) . ' <' . get_option( 'admin_email' ) . '>' . "\r\n";
-        @wp_mail( get_option( 'admin_email' ), sprintf( __( '[%s] New User Registration' ), get_option( 'blogname' ) ), $message, $headers );
-        
-        if( empty( $plaintext_pass ) )return;
-        
-        $message = __( 'Hi there,' ) . "\r\n\r\n";
-        $message.= sprintf( __( "Welcome to %s! Here's how to log in:" ), get_option( 'blogname' ) ) . "\r\n\r\n";
-        $message.= wp_login_url() . "\r\n";
-        $message.= sprintf( __( 'Username: %s' ), $user_login ) . "\r\n";
-        $message.= sprintf( __( 'Password: %s' ), $plaintext_pass ) . "\r\n\r\n";
-        $message.= sprintf( __( 'If you have any problems, please contact me at %s.' ), get_option( 'admin_email' ) ) . "\r\n\r\n";
-        $message.= __( 'Thanks!' );
-        
-        $headers = 'From:' . get_option( 'blogname' ) . ' <' . get_option( 'admin_email' ) . '>' . "\r\n";
-        
-        wp_mail( $user_email, sprintf( __( '[%s] Your username and password' ), get_option( 'blogname' ) ), $message, $headers );
+    }
+
+    // Generate something random for a password reset key.
+    $key = wp_generate_password( 20, false );
+
+    /** This action is documented in wp-login.php */
+    do_action( 'retrieve_password_key', $user->user_login, $key );
+
+    // Now insert the key, hashed, into the DB.
+    if ( empty( $wp_hasher ) ) {
+        require_once ABSPATH . WPINC . '/class-phpass.php';
+        $wp_hasher = new PasswordHash( 8, true );
+    }
+    $hashed = time() . ':' . $wp_hasher->HashPassword( $key );
+    $wpdb->update( $wpdb->users, array( 'user_activation_key' => $hashed ), array( 'user_login' => $user->user_login ) );
+
+    $message = sprintf(__('Username: %s'), $user->user_login) . "\r\n\r\n";
+    $message .= __('To set your password, visit the following address:') . "\r\n\r\n";
+    $message .= '<' . network_site_url("wp-login.php?action=rp&key=$key&login=" . rawurlencode($user->user_login), 'login') . ">\r\n\r\n";
+
+    $message .= wp_login_url() . "\r\n\r\n";
+        $message .= sprintf( __('If you have any problems, please contact us at %s.'), get_option('admin_email') ) . "\r\n\r\n";
+    $message .= __('Adios!') . "\r\n\r\n";
+
+    wp_mail($user->user_email, sprintf(__('[%s] Your username and password info'), $blogname), $message);
     }
 }
 // Declaration of the class
